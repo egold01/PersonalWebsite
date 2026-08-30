@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects — Ethan Goldman</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0B0C0E; --surface: #141618; --surface2: #1E2024; --border: #2A2D33;
+    --text: #F0EDE6; --muted: #8A8D94; --accent: #3B8BEB; --accent2: #6EAEF5;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif; --display: 'Space Grotesk', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+  #grid-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.15; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(11,12,14,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--accent2); }
+
+  /* PAGE HEADER */
+  .page-header { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 10rem 3rem 4rem; }
+  .page-header .eyebrow { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .page-header h1 { font-family: var(--display); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 1rem; }
+  .page-header p { font-size: 1.05rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+  /* TABS */
+  .tabs-wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  .tab-btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.85rem 2rem; background: none; border: none; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent2); border-bottom-color: var(--accent); }
+  .tab-count { font-size: 0.65rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.1rem 0.45rem; margin-left: 0.5rem; color: var(--muted); }
+  .tab-btn.active .tab-count { background: rgba(59,139,235,0.15); border-color: var(--accent); color: var(--accent2); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* PROJECT CARDS */
+  .projects-list { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; display: flex; flex-direction: column; gap: 2rem; }
+  .proj { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 400px 1fr; transition: border-color 0.25s; }
+  .proj:hover { border-color: var(--accent); }
+  .proj.right { grid-template-columns: 1fr 400px; }
+  .proj.right .proj-thumb { order: 2; }
+  .proj.right .proj-body { order: 1; }
+  .proj-thumb { background: var(--surface2); min-height: 260px; position: relative; overflow: hidden; }
+  .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.3s; }
+  .proj:hover .proj-thumb img { opacity: 1; }
+  .proj-thumb svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .proj-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .proj-type { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .proj-title { font-family: var(--display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 0.85rem; }
+  .proj-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .stack-tag { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 2px; }
+  .proj-link { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; width: fit-content; }
+  .proj:hover .proj-link { gap: 0.7rem; }
+
+  /* LEGO GRID — two-column card layout */
+  .lego-grid { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .lego-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
+  .lego-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .lego-card-thumb { background: var(--surface2); aspect-ratio: 16/9; overflow: hidden; }
+  .lego-card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
+  .lego-card:hover .lego-card-thumb img { opacity: 1; }
+  .lego-card-body { padding: 1.75rem; }
+  .lego-card .proj-type { margin-bottom: 0.4rem; }
+  .lego-card .proj-title { font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .lego-card .proj-desc { margin-bottom: 1.25rem; }
+
+  .ph-label { fill: #3B8BEB; font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.45; }
+
+  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .proj, .proj.right { grid-template-columns: 1fr; }
+    .proj.right .proj-thumb, .proj.right .proj-body { order: unset; }
+    .proj-thumb { min-height: 200px; }
+    .lego-grid { grid-template-columns: 1fr; }
+    .tabs-wrap, .projects-list, .lego-grid, .page-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="grid-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ethan Goldman Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="eyebrow">// selected work</p>
+  <h1>Projects</h1>
+  <p>A collection of mechanical, CS, and personal work — spanning robotics, CAD, embedded systems, AI algorithms, and more.</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'me-cs')">ME + CS <span class="tab-count">7</span></button>
+    <button class="tab-btn" onclick="switchTab(event,'other')">Other <span class="tab-count">2</span></button>
+  </div>
+</div>
+
+<!-- ── ME + CS TAB ── -->
+<div class="tab-panel active" id="panel-me-cs">
+  <div class="projects-list">
+
+    <!-- ME35 Robotics -->
+    <div class="proj reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQVd9OhERnAgNH4_mlxco-ipoTziFNTH43bWa52figSO7woBABt7c98Fm8Vuwo2-ZGrUWCC_30o-_LsduASN_WWBkLilwu-qcl8hGr-4Z3hBcy6JEhHvAp7uQasRjk18PrMMkWV3acP97GaniP7QmCjKJXaGpMc2strA2ldh5ZKmNNECAElmtnkjlJybLf8_pFUcf4zwbxpXydxJD5mYSWvuHXSpVfGgI5uEWX6F=w1280" alt="ME35 Robotics"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">Robotics · Course Project</p>
+        <h2 class="proj-title">ME35: Robotics</h2>
+        <p class="proj-desc">Robotics class at Tufts where I built a range of cool projects working with hardware, sensors, microcontrollers, and programming to design and control robotic systems.</p>
+        <div class="proj-stack"><span class="stack-tag">Robotics</span><span class="stack-tag">Microcontrollers</span><span class="stack-tag">Python</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/me35-robotics-projects" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- Custom PCB -->
+    <div class="proj right reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQVZ3Qsq_nV7DK_X_dwdbvG4X4rG1JUT_128JhmsHgpnHpKrOgT0XGnByalPNcW0y4vhCAH3eijHe5R6E5n6THCFUy4ewZcnUH5chCmFHqU9b2WTE1RHLEc5Ohwo-2S5k2N7wXp48FrsEYeKXa6dxIsKUi5qLFmkBA9ga7ldk58grx02_-xPQ6-WP93o1m3d3hNlIgbHdeanH4NQSDkx98MbSZbGsgy5GqVonGKz0rw=w1280" alt="Custom PCB"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">Electronics · PCB Design</p>
+        <h2 class="proj-title">3.3, 5, 12V Voltage Supply PCB</h2>
+        <p class="proj-desc">Designed a custom PCB that takes a 12V input and outputs regulated 3.3V, 5V, and 12V rails — useful for powering mixed-voltage embedded systems from a single supply.</p>
+        <div class="proj-stack"><span class="stack-tag">PCB Design</span><span class="stack-tag">Electronics</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/custom-pcb-design" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- Electric Knife -->
+    <div class="proj reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQVkmnpKl3FMC3wEd41z4X4ko7RlK6kyF0xdn5_4OCs9OtJIAi6JxnYxAaeFlXQLIVEr_-3HcE7l8I4W_uIpZ_PaxxGFKdPjYrq3DJMD8DRL4ehnKH-Zn_z4yuo6e2sNhUIBRmBwiWG3IJDDJySBOggzemeMF7mq0YofkWRyvEnJQI0dr31WDIlGoUCgNR0U00z8BgiD2IH_gxSaA-W7PiLhJqpmWUt-rWpG1W8h=w1280" alt="Electric Knife Teardown"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">CAD · SolidWorks · Reverse Engineering</p>
+        <h2 class="proj-title">Electric Knife Teardown & Modeling</h2>
+        <p class="proj-desc">Disassembled a Proctor Silex Easy Slice Electric Knife and reverse-engineered every component into a detailed virtual assembly in SolidWorks, matching real-world geometry and tolerances.</p>
+        <div class="proj-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">Reverse Engineering</span><span class="stack-tag">CAD</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/electric-knife-teardown-and-modeling" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- San Siro -->
+    <div class="proj right reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQU5-tjz916CzCnWy78ADT_Csm6jjRCQWlxmXoGftOoFByO-cyUrspFU0kHSOlp6plxWaPu8DpzPXcp27J7vnmmdCsC3gWpzvS3VYYqHA=w1280" alt="San Siro Stadium"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">CAD · SolidWorks</p>
+        <h2 class="proj-title">San Siro Stadium</h2>
+        <p class="proj-desc">Modeled the iconic San Siro Stadium in Milan using SolidWorks, recreating the stadium's distinctive architecture and structural geometry in a full 3D virtual model.</p>
+        <div class="proj-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">CAD</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/san-siro-stadium-cad" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- Microwave Control Panel -->
+    <div class="proj reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQVgVTUE-XTf-vxITdkW-hOL7_KX9d1zkZCpdl_mETpy7WBS-dx0-5h4cpnkyA_moMseIZ3Z1rGx_diRkcuZhLpwSq2k_pQLSd86zAL0Wnw0pEJpyaPeuhexNwVagTLU-9MGiWUQJAam198ipuVo0-POo5R77xZz2nys0SCHY9Q-b4QVDRmJQA5ND9Db4nG9VAP2tELPSsDPinfHWvce3L0RFqJ4wPMLcz5nzkMZ=w1280" alt="Microwave Control Panel"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">Embedded Systems · MicroPython</p>
+        <h2 class="proj-title">Microwave Control Panel</h2>
+        <p class="proj-desc">Used an ESP32 microcontroller with MicroPython to build and program a fully functional microwave control panel, handling button input, display output, and timing logic.</p>
+        <div class="proj-stack"><span class="stack-tag">ESP32</span><span class="stack-tag">MicroPython</span><span class="stack-tag">Embedded Systems</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/microwave-control-panel" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- CAD Train -->
+    <div class="proj right reveal">
+      <div class="proj-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQV3VsQj4GEzN8Cn15xD43GqYen9BxpAwWM9JPZveT8HrTOlFBD729JhrR7shYr3udYvWPbJTm6jnOqRgo4YrhjChAB5dE0DpWnNDBjOMMS8IS57pKQQV7H-ootdXThGCSbf7Dm09Ykki3dlU95dP9il4So94EuMqpTlVj1ZZKK23OXYa-jirejUHKob0roPPwj_dOExlGOAHnWBPpk=w1280" alt="CAD Train"/>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">CAD · Onshape</p>
+        <h2 class="proj-title">CAD Train</h2>
+        <p class="proj-desc">Took 2D engineering drawings for a toy train and converted them into a full 3D virtual model using Onshape, practicing the translation from flat technical drawings to complete CAD assemblies.</p>
+        <div class="proj-stack"><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/cad-train" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <!-- CAD Pipe Intersection -->
+    <div class="proj reveal">
+      <div class="proj-thumb">
+        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="260" fill="#1E2024"/>
+          <g stroke="#3B8BEB" fill="none" opacity="0.55">
+            <ellipse cx="200" cy="130" rx="90" ry="50" stroke-width="1.5" stroke-dasharray="7,4"/>
+            <ellipse cx="200" cy="130" rx="90" ry="50" stroke-width="1.5" transform="rotate(90 200 130)" stroke-dasharray="7,4" opacity="0.6"/>
+            <line x1="110" y1="130" x2="290" y2="130" stroke-width="0.8" opacity="0.4"/>
+            <line x1="200" y1="80" x2="200" y2="180" stroke-width="0.8" opacity="0.4"/>
+          </g>
+          <text x="200" y="136" text-anchor="middle" class="ph-label">[ pipe intersection model ]</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <p class="proj-type">CAD · Onshape · Math</p>
+        <h2 class="proj-title">CAD Pipe Intersection (with Calculus)</h2>
+        <p class="proj-desc">Used Onshape to model and visualize the perpendicular intersection between two pipes of equal radius, then analytically calculated the exact volume of the intersection using calculus.</p>
+        <div class="proj-stack"><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span><span class="stack-tag">Calculus</span></div>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/cad-pipe-intersection-with-calculus" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── OTHER TAB ── -->
+<div class="tab-panel" id="panel-other">
+  <div class="projects-list" style="margin-bottom:1rem;">
+    <p style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:1;">// LEGOs</p>
+  </div>
+  <div class="lego-grid">
+
+    <div class="lego-card reveal">
+      <div class="lego-card-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQXbjc4JwcINejtoCKYSsWnJOzhKkh6_haJSmpXPWqLLNdlAXxL_thBsxXON0W7FTSt5fieRDJeogJLgtauts7VXY0J--Clh-0oFnLl1KZgLXp1hZsT89giFfd6gZlY6ojr3BcIYI4lRg3i5wgS7p9xHgv38ExNcavRbEXQyp0omwHVepQIVhUL4b86gBiQ8yYHeADdpLbJuk_14Fh0=w1280" alt="LEGO Ideas"/>
+      </div>
+      <div class="lego-card-body">
+        <p class="proj-type">LEGO · Creative Design</p>
+        <h2 class="proj-title">LEGO Ideas</h2>
+        <p class="proj-desc">My siblings and I created a LEGO Ideas account to participate in LEGO contests and submit original builds in hopes of getting one turned into an official LEGO set.</p>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-other/lego-ideas" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+    <div class="lego-card reveal">
+      <div class="lego-card-thumb">
+        <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQXgDA-nF1jvQUBUJnpNF_3BUMw6zSi29c0BWBykON91UIkXWdPFnYX5UEQbFG7kHpcleAUh1kmZYXiOaRvH_EHmfdC_PKOBsyq2xRVDsJMmq2VykQWWCqd6W3HCss2pVxKMzXoJN2zdyEdQpiBI37k8zubjvfwSt_5iHZPxfkW7DukHbKyNMfMqfudpdgUZGyqs8TFQ5R8ezgYd-sSfd1FOs9yFgJYLdKEVacKaY7Y=w1280" alt="LEGO Room"/>
+      </div>
+      <div class="lego-card-body">
+        <p class="proj-type">LEGO · World-Building</p>
+        <h2 class="proj-title">LEGO Room</h2>
+        <p class="proj-desc">An ongoing project with my siblings to build a complete "LEGO World" in our basement — a large-scale environment made up of many interconnected custom builds.</p>
+        <a href="https://sites.google.com/view/ethan-h-goldman/projects-other/lego-room" target="_blank" class="proj-link">See more →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2026 Ethan Goldman — Engineered with intent. &nbsp;·&nbsp; <a href="index.html" style="color:var(--muted);text-decoration:none;">← Back to home</a></footer>
+
+<script>
+const canvas = document.getElementById('grid-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, t = 0;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+function drawGrid() {
+  ctx.clearRect(0,0,W,H);
+  const gap=48, pulse=0.12+0.04*Math.sin(t*0.008);
+  ctx.strokeStyle=`rgba(59,139,235,${pulse})`; ctx.lineWidth=0.5;
+  for(let x=0;x<=W;x+=gap){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=gap){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.fillStyle=`rgba(59,139,235,${pulse*1.3})`;
+  for(let x=0;x<=W;x+=gap)for(let y=0;y<=H;y+=gap){ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();}
+  t++; requestAnimationFrame(drawGrid);
+}
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) drawGrid();
+
+function switchTab(e, tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  e.target.closest('.tab-btn').classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.querySelectorAll('#panel-' + tab + ' .reveal').forEach(el => {
+    el.classList.remove('visible');
+    setTimeout(() => observer.observe(el), 10);
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

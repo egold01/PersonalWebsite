@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ethan Goldman — Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0B0C0E; --surface: #141618; --surface2: #1E2024; --border: #2A2D33;
+    --text: #F0EDE6; --muted: #8A8D94; --accent: #3B8BEB; --accent2: #6EAEF5;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif; --display: 'Space Grotesk', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+  #grid-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.22; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(11,12,14,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 3rem; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+  .hero-name { font-family: var(--display); font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+  .hero-name span { color: var(--accent); }
+  .hero-desc { font-size: 1.15rem; color: var(--muted); max-width: 580px; line-height: 1.7; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.7s 0.8s forwards; }
+  .tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; padding: 0.35rem 0.85rem; border: 1px solid var(--border); border-radius: 2px; color: var(--muted); background: var(--surface); text-transform: uppercase; }
+  .tag.accent { border-color: var(--accent); color: var(--accent2); background: rgba(59,139,235,0.08); }
+  .hero-cta { display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.7s 1.0s forwards; }
+  .btn { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 2px; transition: all 0.2s; cursor: pointer; border: none; display: inline-block; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .section-label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.15; }
+  .section-divider { width: 100%; height: 1px; background: var(--border); position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+
+  /* CAPABILITIES */
+  .capabilities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+  .cap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; transition: border-color 0.25s; }
+  .cap-card:hover { border-color: var(--accent); }
+  .cap-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .cap-title { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .cap-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.75; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .skills-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; }
+  .skill-group-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); background: var(--surface2); padding: 0.25rem 0.6rem; border-radius: 2px; }
+
+  /* PROJECTS PREVIEW */
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .project-thumb { background: var(--surface2); aspect-ratio: 16/9; position: relative; overflow: hidden; }
+  .project-card.featured .project-thumb { aspect-ratio: auto; min-height: 280px; }
+  .placeholder-svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .project-info { padding: 1.75rem; }
+  .project-type { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .project-title { font-family: var(--display); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.25; }
+  .project-card.featured .project-title { font-size: 1.55rem; }
+  .project-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .stack-tag { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 2px; }
+  .project-arrow { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+  .project-card:hover .project-arrow { gap: 0.7rem; }
+  .view-all-wrap { text-align: center; margin-top: 2.5rem; }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border); }
+  .timeline-item:last-child { border-bottom: 1px solid var(--border); }
+  .timeline-date { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; padding-top: 0.2rem; }
+  .timeline-content h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.15rem; }
+  .timeline-content .company { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+  .timeline-content p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+  /* CONTACT */
+  .contact-inner { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 3.5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .contact-inner h2 { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+  .contact-inner p { color: var(--muted); font-size: 0.95rem; max-width: 400px; line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; min-width: 180px; }
+  .contact-link { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; text-transform: uppercase; }
+  .contact-link:hover { color: var(--accent2); }
+
+  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; } section { padding: 4rem 1.5rem; } #hero { padding: 0 1.5rem; }
+    .about-grid, .projects-grid, .capabilities-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="grid-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ethan Goldman Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-eyebrow">// Mechanical Engineer & CS Graduate · Tufts '25</p>
+  <h1 class="hero-name">Ethan<br/><span>Goldman</span></h1>
+  <p class="hero-desc">Mechanical engineer with a CS background — designing and building automated systems, robotic platforms, and the hardware-software integrations that make them work.</p>
+  <div class="hero-tags">
+    <span class="tag accent">Automation Systems</span>
+    <span class="tag accent">Robotics</span>
+    <span class="tag accent">System Integration</span>
+    <span class="tag">SolidWorks · Onshape · CAD</span>
+    <span class="tag">Python · C/C++ · Java</span>
+    <span class="tag">Machining · Welding · 3D Print</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="https://www.linkedin.com/in/ethan-goldman-47205920b/" target="_blank" class="btn btn-ghost">LinkedIn →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CAPABILITIES -->
+<section id="about">
+  <p class="section-label reveal">// what I do</p>
+  <h2 class="section-title reveal">Engineering at the seam of<br/>hardware and software.</h2>
+  <div class="capabilities-grid">
+    <div class="cap-card reveal">
+      <div class="cap-icon">⚙️</div>
+      <div class="cap-title">Mechanical Design</div>
+      <div class="cap-desc">Full-system mechanical design and enclosure architecture. DFM/DFA, manufacturing drawings, fabrication coordination, and hands-on prototyping from machining to 3D printing.</div>
+    </div>
+    <div class="cap-card reveal">
+      <div class="cap-icon">🤖</div>
+      <div class="cap-title">Automation & Robotics</div>
+      <div class="cap-desc">Designing and deploying automated systems — fluidics, robotic workcells, sensor integration, and motion validation. From concept through installation and documentation.</div>
+    </div>
+    <div class="cap-card reveal">
+      <div class="cap-icon">💻</div>
+      <div class="cap-title">Software & Integration</div>
+      <div class="cap-desc">Automation software development, code reviews, and hardware-software integration. Comfortable across Python, C/C++, Java, and LabVIEW in engineering environments.</div>
+    </div>
+  </div>
+
+  <!-- ABOUT + SKILLS -->
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a mechanical engineer with a second degree in computer science from <strong>Tufts University</strong> (Magna Cum Laude, GPA 3.70). I love working on challenging problems whether that's working on projects that span different disciplines, designing a challenging part, or integrating multiple subsystems.</p>
+      <p>At <strong>Cellino Biotech</strong>, I've spent four years designing, deploying, and iterating on automated cell-processing systems — owning everything from CAD and fabrication through vendor management, software integration, and code reviews.</p>
+      <p>I'm equally comfortable at a machine or a keyboard, and I'm energized by the kind of work that requires both.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-label">Mechanical & Manufacturing</div>
+        <div class="skill-pills">
+          <span class="skill-pill">SolidWorks</span><span class="skill-pill">Onshape</span>
+          <span class="skill-pill">DFM/DFA</span><span class="skill-pill">Machining</span>
+          <span class="skill-pill">Welding</span><span class="skill-pill">3D Printing</span>
+          <span class="skill-pill">Laser Cutting</span><span class="skill-pill">Waterjet</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Automation & Robotics</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Staubli RS</span><span class="skill-pill">LabVIEW</span>
+          <span class="skill-pill">System Integration</span><span class="skill-pill">Fluidics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Software</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">C/C++</span>
+          <span class="skill-pill">Java</span><span class="skill-pill">SQL</span><span class="skill-pill">Git</span><span class="skill-pill">Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS PREVIEW -->
+<section id="projects">
+  <p class="section-label reveal">// selected work</p>
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card featured reveal">
+      <div class="project-thumb">
+        <svg class="placeholder-svg" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="600" height="320" fill="#1E2024"/>
+          <g stroke="#2A2D33" stroke-width="1" fill="none">
+            <line x1="0" y1="160" x2="600" y2="160"/><line x1="300" y1="0" x2="300" y2="320"/>
+            <circle cx="300" cy="160" r="90" stroke="#3B8BEB" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <circle cx="300" cy="160" r="45" stroke="#3B8BEB" stroke-width="1" stroke-dasharray="3,4" opacity="0.5"/>
+            <rect x="210" y="110" width="180" height="100" stroke="#3B8BEB" stroke-width="1" opacity="0.3"/>
+          </g>
+          <text x="300" y="166" text-anchor="middle" fill="#3B8BEB" font-family="JetBrains Mono,monospace" font-size="11" opacity="0.5">[ add project image ]</text>
+        </svg>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Featured · Mechanical + Automation</p>
+        <h3 class="project-title">Featured Project Title</h3>
+        <p class="project-desc">Description of your featured project goes here — what it is, what problem it solves, and what makes it technically interesting. 2–3 sentences works well.</p>
+        <div class="project-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">Python</span><span class="stack-tag">Automation</span></div>
+        <span class="project-arrow">View project →</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb">
+        <svg class="placeholder-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#1E2024"/>
+          <g stroke="#3B8BEB" stroke-width="1.2" fill="none" opacity="0.5">
+            <rect x="100" y="55" width="200" height="115" rx="3" stroke="#3B8BEB"/>
+            <line x1="100" y1="80" x2="300" y2="80"/><line x1="140" y1="80" x2="140" y2="170"/>
+            <circle cx="200" cy="127" r="25" stroke-dasharray="5,3"/>
+          </g>
+          <text x="200" y="132" text-anchor="middle" fill="#3B8BEB" font-family="JetBrains Mono,monospace" font-size="10" opacity="0.5">[ add image ]</text>
+        </svg>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Mechanical</p>
+        <h3 class="project-title">Project Title</h3>
+        <p class="project-desc">Short description of this mechanical project.</p>
+        <div class="project-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">Machining</span></div>
+        <span class="project-arrow">View project →</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-thumb">
+        <svg class="placeholder-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="225" fill="#1E2024"/>
+          <g stroke="#3B8BEB" stroke-width="1.2" fill="none" opacity="0.5">
+            <polyline points="60,170 130,110 200,140 270,80 340,100"/>
+            <line x1="60" y1="50" x2="60" y2="175" stroke="#2A2D33"/>
+            <line x1="60" y1="175" x2="355" y2="175" stroke="#2A2D33"/>
+          </g>
+          <text x="200" y="135" text-anchor="middle" fill="#3B8BEB" font-family="JetBrains Mono,monospace" font-size="10" opacity="0.5">[ add image ]</text>
+        </svg>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Software</p>
+        <h3 class="project-title">Project Title</h3>
+        <p class="project-desc">Short description of this software project.</p>
+        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">C++</span></div>
+        <span class="project-arrow">View project →</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="view-all-wrap reveal">
+    <a href="projects.html" class="btn btn-ghost">View All Projects →</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">// experience</p>
+  <h2 class="section-title reveal">Where I've Worked</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">May 2025 — Present</div>
+      <div class="timeline-content">
+        <h3>Mechanical Engineer</h3>
+        <div class="company">Cellino Biotech · Cambridge, MA</div>
+        <p>Designed mechanical architecture for a next-gen automated cell-processing prototype (~10 integrated subsystems). Contributed to automation software — creating and reviewing PRs, participating in design reviews, and building updates enabling parallel workcell operations.</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">May 2022 — May 2025</div>
+      <div class="timeline-content">
+        <h3>Automation & Mechanical Engineering Intern</h3>
+        <div class="company">Cellino Biotech · Cambridge, MA</div>
+        <p>Owned the full lifecycle of an automated fluidics system — hardware spec, CAD, software integration, testing, deployment, and documentation. Eliminated manual reagent loading, improving lab throughput and scalability.</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Jun 2021 — Aug 2021</div>
+      <div class="timeline-content">
+        <h3>Computer Science Instructor (Code Sensei)</h3>
+        <div class="company">Code Ninjas · Wellesley, MA</div>
+        <p>Co-designed and taught week-long coding camps in Python, Lua, Minecraft, and Scratch for students from preschool through middle school.</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2019 — 2020</div>
+      <div class="timeline-content">
+        <h3>Summer Research Intern</h3>
+        <div class="company">Tufts CEEO · Medford, MA</div>
+        <p>Collaborated with LEGO on SPIKE Prime — integrating third-party sensors and implementing AI/ML algorithms (kNN, linear regression) to support STEM education research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label reveal">// contact</p>
+  <div class="contact-inner reveal">
+    <div>
+      <h2>Let's build something.</h2>
+      <p>I'm open to opportunities in mechanical engineering, robotics, and automation — especially where hardware meets software. If you're working on something interesting, I'd love to hear about it.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:ethangoldman01@gmail.com" class="contact-link">✉ Email me</a>
+      <a href="https://www.linkedin.com/in/ethan-goldman-47205920b/" target="_blank" class="contact-link">↗ LinkedIn</a>
+      <a href="#" class="contact-link" style="opacity:0.4;cursor:default;">↗ GitHub (add link)</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Ethan Goldman — Engineered with intent.</footer>
+
+<script>
+const canvas = document.getElementById('grid-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, t = 0;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+function drawGrid() {
+  ctx.clearRect(0,0,W,H);
+  const gap=48, pulse=0.16+0.05*Math.sin(t*0.008);
+  ctx.strokeStyle=`rgba(59,139,235,${pulse})`; ctx.lineWidth=0.5;
+  for(let x=0;x<=W;x+=gap){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<=H;y+=gap){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.fillStyle=`rgba(59,139,235,${pulse*1.4})`;
+  for(let x=0;x<=W;x+=gap)for(let y=0;y<=H;y+=gap){ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();}
+  t++; requestAnimationFrame(drawGrid);
+}
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) drawGrid();
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
