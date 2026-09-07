@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="icon" type="image/png" href="images/favicon.png"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
 <title>Ethan Goldman — Mechanical Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -19,7 +19,8 @@
 
   /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(11,12,14,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; text-decoration: none; }
+  .nav-logo { display: flex; align-items: center; gap: 0.55rem; font-family: var(--display); font-size: 0.95rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; text-decoration: none; }
+  .nav-logo-icon { width: 1.5rem; height: 1.5rem; object-fit: cover; border-radius: 2px; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
@@ -122,7 +123,7 @@
 <canvas id="grid-canvas"></canvas>
 
 <nav>
-  <a href="index.html" class="nav-logo">Ethan Goldman Portfolio</a>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="projects.html">Projects</a></li>
