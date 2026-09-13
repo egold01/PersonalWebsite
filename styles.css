@@ -19,6 +19,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .project-body{margin-top:1rem}
 .source-content{max-width:780px;margin:2rem auto 0;display:grid;gap:1.5rem}
 .source-content p,.source-content li{color:var(--muted);line-height:1.75}
+.source-content p strong{font-family:var(--display);font-size:1.08rem;color:var(--text)}
 .source-content a{color:var(--accent2)}
 .source-content h2{font-family:var(--display);font-size:1.35rem;line-height:1.3;margin:1rem 0 0}
 .source-block{display:grid;gap:1rem}
@@ -28,6 +29,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-image-placeholder{min-height:220px;display:grid;place-items:center;padding:2rem;background:var(--surface2);border:1px dashed var(--accent);border-radius:4px;color:var(--accent2);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-align:center;text-transform:uppercase}
 .source-image-placeholder.wide{min-height:300px}
 .source-image{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:4px}
+.source-image-list{display:grid;gap:1.5rem;clear:both}
+.source-image-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem;align-items:center}
+.source-image-story .source-image{height:100%;object-fit:cover}
+.source-image-story p{margin:0;color:var(--text);font-size:1rem;font-weight:600;line-height:1.7}
+.source-flow{display:flow-root;color:var(--muted);line-height:1.75}
+.source-flow-image{float:left;width:46%;max-width:360px;margin:0 1.5rem 1rem 0}
+.source-flow p{margin-bottom:1rem}
 .source-caption{margin-top:-1rem;color:var(--muted);font-family:var(--mono);font-size:.72rem;line-height:1.5;text-align:center}
 .source-caption a{color:var(--accent2)}
 .source-video{width:100%;display:block;border:1px solid var(--border);border-radius:4px;background:var(--surface2)}
@@ -43,4 +51,4 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-carousel-dot{width:.55rem;height:.55rem;padding:0;border:1px solid var(--muted);border-radius:50%;background:transparent;cursor:pointer}
 .source-carousel-dot.active{border-color:var(--accent);background:var(--accent)}
 .footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.68rem;color:var(--muted)}
-@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}
+@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}.source-image-story{grid-template-columns:1fr}.source-image-story p{font-size:.95rem}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}
