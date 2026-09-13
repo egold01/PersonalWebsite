@@ -264,16 +264,17 @@ function drawGrid() {
 }
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) drawGrid();
 
-function switchTab(e, tab) {
+function activateTab(tab, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  e.target.closest('.tab-btn').classList.add('active');
+  btn.classList.add('active');
   document.getElementById('panel-' + tab).classList.add('active');
   document.querySelectorAll('#panel-' + tab + ' .reveal').forEach(el => {
     el.classList.remove('visible');
     setTimeout(() => observer.observe(el), 10);
   });
 }
+function switchTab(e, tab) { activateTab(tab, e.target.closest('.tab-btn')); }
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
@@ -281,6 +282,10 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+if (location.hash === '#other') {
+  activateTab('other', document.querySelector('.tab-btn[onclick*="other"]'));
+}
 
 document.querySelectorAll('.proj[data-href]').forEach(card => {
   const openProject = () => { window.location.href = card.dataset.href; };

@@ -15,18 +15,54 @@
 <main class="container project-hero">
   <h1 class="project-page-title">LEGO Room</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: LEGO Room carousel</div>
-    <h2>My siblings and I transformed part of our basement into a LEGO Room to store all of the LEGOs that we collected over the years. We began the transformation by creating a SketchUp drawing of what the room should look like. I created the actual drawing which you can see pictured below.</h2>
-    <div class="source-image-placeholder">Image placeholder: SketchUp drawing</div>
-    <h2>We then built the lower of the two tables that you can see on the right side of the drawing (with the help of our dad).</h2>
-    <div class="source-image-placeholder">Image placeholder: lower table</div>
-    <h2>Below you can see the LEGO Room under construction...</h2>
-    <div class="source-image-placeholder">Image placeholder: room under construction</div>
+    <div class="source-carousel fixed-ratio" data-carousel style="--carousel-ratio:942/625">
+      <div class="source-carousel-track">
+        <figure class="source-carousel-slide"><img src="images/LegoRoom/carousel1.png" alt="LEGO Room overview"/></figure>
+        <figure class="source-carousel-slide"><img src="images/LegoRoom/carousel2.png" alt="LEGO Room display"/></figure>
+        <figure class="source-carousel-slide"><img src="images/LegoRoom/carousel3.png" alt="LEGO Room display"/></figure>
+        <figure class="source-carousel-slide"><img src="images/LegoRoom/carousel4.png" alt="LEGO Room display"/></figure>
+        <figure class="source-carousel-slide"><img src="images/LegoRoom/carousel5.jpeg" alt="Completed LEGO Room"/></figure>
+      </div>
+      <button class="source-carousel-button previous" type="button" data-carousel-previous aria-label="Previous image">&#8249;</button>
+      <button class="source-carousel-button next" type="button" data-carousel-next aria-label="Next image">&#8250;</button>
+      <div class="source-carousel-dots" aria-label="Choose LEGO Room image">
+        <button class="source-carousel-dot active" type="button" data-carousel-dot="0" aria-label="Show image 1" aria-current="true"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="1" aria-label="Show image 2"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="2" aria-label="Show image 3"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="3" aria-label="Show image 4"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="4" aria-label="Show image 5"></button>
+      </div>
+    </div>
+    <p>My siblings and I transformed part of our basement into a LEGO Room to store all of the LEGOs that we collected over the years. We began the transformation by creating a SketchUp drawing of what the room should look like. I created the actual drawing which you can see pictured below.</p>
+    <img class="source-image" src="images/LegoRoom/SketchupCAD.png" alt="SketchUp drawing of the LEGO Room plan"/>
+    <p>We then built the lower of the two tables that you can see on the right side of the drawing (with the help of our dad).</p>
+    <img class="source-image" src="images/LegoRoom/LowerTable.png" alt="Lower table built for the LEGO Room"/>
+    <p>Below you can see the LEGO Room under construction...</p>
+    <img class="source-image" src="images/LegoRoom/UnderConstruction.png" alt="LEGO Room under construction"/>
     <p>We attached all of the boxes that the LEGO sets came in to the walls, sorted the pieces, organized the instructions, hung some things from the ceiling, set everything else up on the floor and voila, a complete LEGO world! Pictured below, you can see the completed LEGO Room as it currently exists.</p>
-    <div class="source-image-placeholder">Image placeholder: completed LEGO Room</div>
+    <img class="source-image" src="images/LegoRoom/carousel5.jpeg" alt="Completed LEGO Room"/>
   </div>
-  <p><a href="projects.html" class="btn">← Back to projects</a></p>
+  <p><a href="projects.html#other" class="btn">← Back to projects</a></p>
 </main>
 <footer class="footer">© 2026 Ethan Goldman — Engineered with intent.</footer>
+<script>
+document.querySelectorAll('[data-carousel]').forEach(carousel => {
+  const track = carousel.querySelector('.source-carousel-track');
+  const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
+  let currentSlide = 0;
+  const showSlide = slide => {
+    currentSlide = (slide + dots.length) % dots.length;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, index) => {
+      const active = index === currentSlide;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  };
+  carousel.querySelector('[data-carousel-previous]').addEventListener('click', () => showSlide(currentSlide - 1));
+  carousel.querySelector('[data-carousel-next]').addEventListener('click', () => showSlide(currentSlide + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.carouselDot))));
+});
+</script>
 </body>
 </html>
