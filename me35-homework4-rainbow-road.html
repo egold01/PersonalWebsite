@@ -15,14 +15,29 @@
 <main class="container project-hero">
   <h1 class="project-page-title">Homework4: Rainbow Road</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <div class="source-carousel" data-carousel>
+      <div class="source-carousel-track">
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-4/carousel1.png" alt="Rainbow Road project overview"/></figure>
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-4/carousel2.png" alt="Rainbow Road robot"/></figure>
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-4/carousel3.png" alt="Rainbow Road camera system"/></figure>
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-4/carousel4.png" alt="Completed Rainbow Road project"/></figure>
+      </div>
+      <button class="source-carousel-button previous" type="button" data-carousel-previous aria-label="Previous image">&#8249;</button>
+      <button class="source-carousel-button next" type="button" data-carousel-next aria-label="Next image">&#8250;</button>
+      <div class="source-carousel-dots" aria-label="Choose carousel image">
+        <button class="source-carousel-dot active" type="button" data-carousel-dot="0" aria-label="Show image 1" aria-current="true"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="1" aria-label="Show image 2"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="2" aria-label="Show image 3"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="3" aria-label="Show image 4"></button>
+      </div>
+    </div>
     <p><strong>Goal:</strong></p>
     <p>Design and build a robot that can follow one or more colored lines using a camera and edge detection.</p>
     <p><strong>Solution:</strong></p>
     <p>I worked with Salvatore Novak to design a robot that uses one camera to follow a line using edge detection and path memorization/backtracking.</p>
     <p>We used the same chassis for this robot that we used for our Homework 3 robot -- we just removed the color sensors and all of the related wiring and taped the pi to the front of the robot.</p>
     <p>Before attaching the pi, we ran the base code provided by Professor Briana Bouchard and moved the camera around to find the optimal height at which the camera could perform the edge detection. Fortunately, that height was right around the height of the robot chassis so we were able to attach the camera directly to the top of the chassis without having to make any modifications to it.</p>
-    <div class="source-image-placeholder">Image placeholder: robot with camera</div>
+    <img class="source-image" src="images/ME-35/Homework-4/RobotWithCamera.jpg" alt="Rainbow Road robot with camera"/>
     <p>The base code provided already did the edge detection using a series of filters and calculations:</p>
     <ol>
       <li>Gaussian blur</li>
@@ -32,12 +47,35 @@
       <li>Calculate the "center of mass" of the part of the line that the camera is seeing and use that data to determine whether to go left right or straight</li>
     </ol>
     <p>We added code to turn the robot in the appropriate direction and voila...</p>
+    <video class="source-video" controls preload="metadata">
+      <source src="images/ME-35/Homework-4/IMG_2039.mp4" type="video/mp4"/>
+      Your browser does not support this video format.
+    </video>
     <p>In order to add an additional challenge, we implemented code that allows the robot to backtrack if it loses the line. The program keeps a list of the moves that it has performed, appending new moves to the front of the list. If the robot loses the line, it pops the command at the front of the list (the most recent move) and performs the opposite of that move, backtracking one move. The robot will continue to backtrack until it sees the line again.</p>
     <p>One issue that we ran into when first implementing this algorithm was that the robot would suddenly backtrack when it still appeared to be on the line. We debugged by adding print statements and looking at the output of the code -- the issue was that in normal operation the robot every once in a while when it was right on the edge of the line would momentarily sense that it had lost the line and then see the line again and continue on its way. In order to avoid backtracking during this moments of indecision, we added a counter variable that begins to count when the robot goes off of the line. If the robot remains off of the line for 50 counts without moving off of the line then it is definitely off of the line and we need to backtrack. It worked!! :)</p>
-    <div class="source-image-placeholder">Image placeholder: Rainbow Road robot</div>
+    <img class="source-image" src="images/ME-35/Homework-4/RainbowRoadRobot.jpg" alt="Rainbow Road robot"/>
   </div>
   <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
 </main>
 <footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+<script>
+document.querySelectorAll('[data-carousel]').forEach(carousel => {
+  const track = carousel.querySelector('.source-carousel-track');
+  const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
+  let currentSlide = 0;
+  const showSlide = slide => {
+    currentSlide = (slide + dots.length) % dots.length;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, index) => {
+      const active = index === currentSlide;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  };
+  carousel.querySelector('[data-carousel-previous]').addEventListener('click', () => showSlide(currentSlide - 1));
+  carousel.querySelector('[data-carousel-next]').addEventListener('click', () => showSlide(currentSlide + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.carouselDot))));
+});
+</script>
 </body>
 </html>
