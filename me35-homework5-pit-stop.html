@@ -15,7 +15,20 @@
 <main class="container project-hero">
   <h1 class="project-page-title">Homework5: Pit Stop</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <div class="source-carousel" data-carousel>
+      <div class="source-carousel-track">
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-5/carousel1.png" alt="Pit Stop project overview"/></figure>
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-5/carousel2.png" alt="Pit Stop remote control setup"/></figure>
+        <figure class="source-carousel-slide"><img src="images/ME-35/Homework-5/carousel3.png" alt="Pit Stop maze challenge"/></figure>
+      </div>
+      <button class="source-carousel-button previous" type="button" data-carousel-previous aria-label="Previous image">&#8249;</button>
+      <button class="source-carousel-button next" type="button" data-carousel-next aria-label="Next image">&#8250;</button>
+      <div class="source-carousel-dots" aria-label="Choose carousel image">
+        <button class="source-carousel-dot active" type="button" data-carousel-dot="0" aria-label="Show image 1" aria-current="true"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="1" aria-label="Show image 2"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="2" aria-label="Show image 3"></button>
+      </div>
+    </div>
     <p><strong>Goal:</strong></p>
     <p>Navigate a maze by remotely controlling an iRobot Create 3 robot with an Airtable API</p>
     <p><strong>Code:</strong> <a href="https://github.com/egold01/ME35_Create3_Maze" target="_blank" rel="noopener">github.com/egold01/ME35_Create3_Maze</a></p>
@@ -33,12 +46,37 @@
     </ol>
     <p>IT WORKED!!! :)</p>
     <p>Here's a video of us moving the robot around by changing the value on the AirTable. One cool thing to note in this video is that the Create3 and my computer are on two different networks and I can still control the robot!!! That's pretty cool!!</p>
-    <div class="source-image-placeholder wide">Video placeholder: remote robot control</div>
+    <video class="source-video" controls preload="metadata">
+      <source src="images/ME-35/Homework-5/IMG_2068%20(1).mp4" type="video/mp4"/>
+      Your browser does not support this video format.
+    </video>
     <p>And here's a (slightly sped up) video of our robot going through the maze! Vibha is controlling the robot remotely two floors above where the robot actually is!!</p>
-    <div class="source-image-placeholder wide">Video placeholder: robot maze run</div>
+    <video class="source-video" controls preload="metadata">
+      <source src="images/ME-35/Homework-5/IMG_3162.mp4" type="video/mp4"/>
+      Your browser does not support this video format.
+    </video>
   </div>
   <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
 </main>
 <footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+<script>
+document.querySelectorAll('[data-carousel]').forEach(carousel => {
+  const track = carousel.querySelector('.source-carousel-track');
+  const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
+  let currentSlide = 0;
+  const showSlide = slide => {
+    currentSlide = (slide + dots.length) % dots.length;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, index) => {
+      const active = index === currentSlide;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  };
+  carousel.querySelector('[data-carousel-previous]').addEventListener('click', () => showSlide(currentSlide - 1));
+  carousel.querySelector('[data-carousel-next]').addEventListener('click', () => showSlide(currentSlide + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.carouselDot))));
+});
+</script>
 </body>
 </html>
