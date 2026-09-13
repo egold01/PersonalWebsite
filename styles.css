@@ -28,6 +28,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-image-placeholder{min-height:220px;display:grid;place-items:center;padding:2rem;background:var(--surface2);border:1px dashed var(--accent);border-radius:4px;color:var(--accent2);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-align:center;text-transform:uppercase}
 .source-image-placeholder.wide{min-height:300px}
 .source-image{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:4px}
+.source-caption{margin-top:-1rem;color:var(--muted);font-family:var(--mono);font-size:.72rem;line-height:1.5;text-align:center}
+.source-caption a{color:var(--accent2)}
+.source-video{width:100%;display:block;border:1px solid var(--border);border-radius:4px;background:var(--surface2)}
 .source-carousel{position:relative;overflow:hidden;background:var(--surface2);border:1px solid var(--border);border-radius:4px}
 .source-carousel-track{display:flex;transition:transform .3s ease}
 .source-carousel-slide{min-width:100%;margin:0}
