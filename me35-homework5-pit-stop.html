@@ -33,10 +33,10 @@
     <p>Navigate a maze by remotely controlling an iRobot Create 3 robot with an Airtable API</p>
     <p><strong>Code:</strong> <a href="https://github.com/egold01/ME35_Create3_Maze" target="_blank" rel="noopener">github.com/egold01/ME35_Create3_Maze</a></p>
     <p>FlameRunner.py - code to read from and parse AirTable data</p>
-    <p>Move_FlameRunner.py - code to control movement of Create3 robot by publishing data to /cmd_vel topic. Uses FlameRunner.py to get values to publish from AirTable</p>
+    <p>Move_FlameRunner.py - code to control movement of the Create3 robot by publishing data to the /cmd_vel topic. Uses FlameRunner.py to get values to publish from AirTable</p>
     <p><strong>Solution:</strong></p>
-    <p>I worked with Cardi Mendez and Vibha Kamath to complete this challenge. The most difficult thing about this challenge was the code. I was new to APIs, ROS (which we used to control the Create3), and Create3s so learning how to interface them all together was a fun challenge!</p>
-    <p>At the end of the day, the basic setup was that we had an AirTable table open on a web browser which a python script constantly read from. Every time we read values from the table, a publisher would publish those value to the ROS /cmd_vel topic. The Create3 robot was subscribed to that topic and therefore was able to set its movement values to the most recent values published to the topic.</p>
+    <p>I worked with Cardi Mendez and Vibha Kamath to complete this challenge. The most difficult thing about this challenge was the code. I was new to APIs, ROS (which we used to control the Create3), and Create3 robots, so learning how to interface them all together was a fun challenge!</p>
+    <p>At the end of the day, the basic setup was that we had an AirTable table open in a web browser which a Python script constantly read from. Every time we read values from the table, a publisher would publish those values to the ROS /cmd_vel topic. The Create3 robot was subscribed to that topic and therefore was able to set its movement values to the most recent values published to the topic.</p>
     <p>As simple as that sounds, getting to that point took several steps:</p>
     <ol>
       <li>First we created an AirTable table and made sure that we could read values from it. We did this in the FlameRunner.py script linked above</li>

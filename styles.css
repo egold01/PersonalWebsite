@@ -30,6 +30,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-image-placeholder.wide{min-height:300px}
 .source-image{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:4px}
 .source-image-list{display:grid;gap:1.5rem;clear:both}
+.source-image-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.source-image-row .source-image:first-child{height:auto}
+.source-image-row.comparison-row-one .source-image:last-child{height:auto;aspect-ratio:2.326;object-fit:cover}
+.source-image-row.comparison-row-two .source-image:last-child{height:auto;aspect-ratio:2.116;object-fit:cover}
 .source-image-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem;align-items:center}
 .source-image-story .source-image{height:100%;object-fit:cover}
 .source-image-story p{margin:0;color:var(--text);font-size:1rem;font-weight:600;line-height:1.7}
@@ -51,4 +55,4 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-carousel-dot{width:.55rem;height:.55rem;padding:0;border:1px solid var(--muted);border-radius:50%;background:transparent;cursor:pointer}
 .source-carousel-dot.active{border-color:var(--accent);background:var(--accent)}
 .footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.68rem;color:var(--muted)}
-@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}.source-image-story{grid-template-columns:1fr}.source-image-story p{font-size:.95rem}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}
+@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}.source-image-row{grid-template-columns:1fr}.source-image-row .source-image{height:auto;aspect-ratio:auto!important}.source-image-story{grid-template-columns:1fr}.source-image-story p{font-size:.95rem}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}
