@@ -43,6 +43,16 @@
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
+  /* TAG FILTERS */
+  .tag-filters { display: flex; flex-direction: column; gap: 1rem; margin: -1.5rem 0 2.5rem; }
+  .tag-filter-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tag-filter-btn { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--muted); cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+  .tag-filter-btn:hover { color: var(--text); border-color: var(--accent); }
+  .tag-filter-btn.active { color: var(--accent2); border-color: var(--accent); background: rgba(59,139,235,0.12); }
+  .tag-filter-menu { display: flex; flex-wrap: wrap; gap: 0.5rem; background: rgba(59,139,235,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 1rem; }
+  .tag-filter-menu[hidden] { display: none; }
+  .tag-filter-menu .tag-filter-btn { background: var(--surface); }
+
   /* PROJECT CARDS */
   .projects-list { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; display: flex; flex-direction: column; gap: 2rem; }
   .proj { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 400px 1fr; transition: border-color 0.25s; cursor: pointer; }
@@ -62,6 +72,7 @@
   .proj-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
   .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
   .stack-tag { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 2px; }
+  .stack-tag.category { color: var(--accent2); border-color: var(--accent); }
   .proj-link { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; width: fit-content; }
   .proj:hover .proj-link { gap: 0.7rem; }
 
@@ -77,6 +88,8 @@
     .proj.right .proj-thumb, .proj.right .proj-body { order: unset; }
     .proj-thumb { min-height: 200px; }
     .tabs-wrap, .projects-list, .page-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
   }
@@ -106,6 +119,7 @@
     <button class="tab-btn active" onclick="switchTab(event,'me-cs')">ME + CS <span class="tab-count">7</span></button>
     <button class="tab-btn" onclick="switchTab(event,'other')">Other <span class="tab-count">2</span></button>
   </div>
+  <div class="tag-filters" id="tag-filters"></div>
 </div>
 
 <!-- ── ME + CS TAB ── -->
@@ -113,99 +127,99 @@
   <div class="projects-list">
 
     <!-- ME35 Robotics -->
-    <div class="proj reveal" data-href="me35-robotics.html" role="link" tabindex="0">
+    <div class="proj reveal" data-href="me35-robotics.html" data-date="2024-03" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/me35-robotics.jpg" alt="ME35 Robotics"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">Robotics · Course Project</p>
+        <p class="proj-type">Robotics · Course Project · Spring 2024</p>
         <h2 class="proj-title">ME35: Robotics</h2>
         <p class="proj-desc">Robotics class at Tufts where I built a range of cool projects working with hardware, sensors, microcontrollers, and programming to design and control robotic systems.</p>
-        <div class="proj-stack"><span class="stack-tag">Robotics</span><span class="stack-tag">Microcontrollers</span><span class="stack-tag">Python</span></div>
+        <div class="proj-stack"><span class="stack-tag category">CS</span><span class="stack-tag category">MechE</span><span class="stack-tag">Robotics</span><span class="stack-tag">Microcontrollers</span><span class="stack-tag">Python</span></div>
         <a href="me35-robotics.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- Custom PCB -->
-    <div class="proj right reveal" data-href="custom-pcb-design.html" role="link" tabindex="0">
+    <div class="proj right reveal" data-href="custom-pcb-design.html" data-date="2023-09" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/custom-pcb.jpg" alt="Custom PCB"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">Electronics · PCB Design</p>
+        <p class="proj-type">Electronics · PCB Design · Fall 2023</p>
         <h2 class="proj-title">3.3, 5, 12V Voltage Supply PCB</h2>
         <p class="proj-desc">Designed a custom PCB that takes a 12V input and outputs regulated 3.3V, 5V, and 12V rails — useful for powering mixed-voltage embedded systems from a single supply.</p>
-        <div class="proj-stack"><span class="stack-tag">PCB Design</span><span class="stack-tag">Electronics</span></div>
+        <div class="proj-stack"><span class="stack-tag category">MechE</span><span class="stack-tag">PCB Design</span><span class="stack-tag">Electronics</span></div>
         <a href="custom-pcb-design.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- Electric Knife -->
-    <div class="proj reveal" data-href="electric-knife.html" role="link" tabindex="0">
+    <div class="proj reveal" data-href="electric-knife.html" data-date="2023-03" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/electric-knife.jpg" alt="Electric Knife Teardown"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">CAD · SolidWorks · Reverse Engineering</p>
+        <p class="proj-type">CAD · SolidWorks · Reverse Engineering · Spring 2023</p>
         <h2 class="proj-title">Electric Knife Teardown & Modeling</h2>
         <p class="proj-desc">Disassembled a Proctor Silex Easy Slice Electric Knife and reverse-engineered every component into a detailed virtual assembly in SolidWorks, matching real-world geometry and tolerances.</p>
-        <div class="proj-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">Reverse Engineering</span><span class="stack-tag">CAD</span></div>
+        <div class="proj-stack"><span class="stack-tag category">MechE</span><span class="stack-tag">SolidWorks</span><span class="stack-tag">Reverse Engineering</span><span class="stack-tag">CAD</span></div>
         <a href="electric-knife.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- San Siro -->
-    <div class="proj right reveal" data-href="san-siro-stadium.html" role="link" tabindex="0">
+    <div class="proj right reveal" data-href="san-siro-stadium.html" data-date="2023-09" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/san-siro.jpg" alt="San Siro Stadium"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">CAD · SolidWorks</p>
+        <p class="proj-type">CAD · SolidWorks · Fall 2023</p>
         <h2 class="proj-title">San Siro Stadium</h2>
         <p class="proj-desc">Modeled the iconic San Siro Stadium in Milan using SolidWorks, recreating the stadium's distinctive architecture and structural geometry in a full 3D virtual model.</p>
-        <div class="proj-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">CAD</span></div>
+        <div class="proj-stack"><span class="stack-tag category">MechE</span><span class="stack-tag">SolidWorks</span><span class="stack-tag">CAD</span></div>
         <a href="san-siro-stadium.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- Microwave Control Panel -->
-    <div class="proj reveal" data-href="microwave-control-panel.html" role="link" tabindex="0">
+    <div class="proj reveal" data-href="microwave-control-panel.html" data-date="2021-09" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/microwave-control-panel.jpg" alt="Microwave Control Panel"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">Embedded Systems · MicroPython</p>
+        <p class="proj-type">Embedded Systems · MicroPython · Fall 2021</p>
         <h2 class="proj-title">Microwave Control Panel</h2>
         <p class="proj-desc">Used an ESP32 microcontroller with MicroPython to build and program a fully functional microwave control panel, handling button input, display output, and timing logic.</p>
-        <div class="proj-stack"><span class="stack-tag">ESP32</span><span class="stack-tag">MicroPython</span><span class="stack-tag">Embedded Systems</span></div>
+        <div class="proj-stack"><span class="stack-tag category">CS</span><span class="stack-tag">ESP32</span><span class="stack-tag">MicroPython</span><span class="stack-tag">Embedded Systems</span></div>
         <a href="microwave-control-panel.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- CAD Train -->
-    <div class="proj right reveal" data-href="cad-train.html" role="link" tabindex="0">
+    <div class="proj right reveal" data-href="cad-train.html" data-date="2017-09" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/cad-train.jpg" alt="CAD Train"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">CAD · Onshape</p>
+        <p class="proj-type">CAD · Onshape · Fall 2017</p>
         <h2 class="proj-title">CAD Train</h2>
         <p class="proj-desc">Took 2D engineering drawings for a toy train and converted them into a full 3D virtual model using Onshape, practicing the translation from flat technical drawings to complete CAD assemblies.</p>
-        <div class="proj-stack"><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span></div>
+        <div class="proj-stack"><span class="stack-tag category">MechE</span><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span></div>
         <a href="cad-train.html" class="proj-link">See more →</a>
       </div>
     </div>
 
     <!-- CAD Pipe Intersection -->
-    <div class="proj reveal" data-href="cad-pipe-intersection.html" role="link" tabindex="0">
+    <div class="proj reveal" data-href="cad-pipe-intersection.html" data-date="2021-03" role="link" tabindex="0">
       <div class="proj-thumb">
         <iframe class="proj-pdf-preview" src="images/ElectricKnife/Ethan%20Goldman%202D%20and%203D%20Pipe%20Intersection.pdf#page=1&zoom=page" title="CAD Pipe Intersection PDF preview"></iframe>
       </div>
       <div class="proj-body">
-        <p class="proj-type">CAD · Onshape · Math</p>
+        <p class="proj-type">CAD · Onshape · Math · Spring 2021</p>
         <h2 class="proj-title">CAD Pipe Intersection (with Calculus)</h2>
         <p class="proj-desc">Used Onshape to model and visualize the perpendicular intersection between two pipes of equal radius, then analytically calculated the exact volume of the intersection using calculus.</p>
-        <div class="proj-stack"><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span><span class="stack-tag">Calculus</span></div>
+        <div class="proj-stack"><span class="stack-tag category">MechE</span><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span><span class="stack-tag">Calculus</span></div>
         <a href="cad-pipe-intersection.html" class="proj-link">See more →</a>
       </div>
     </div>
@@ -217,26 +231,28 @@
 <div class="tab-panel" id="panel-other">
   <div class="projects-list">
 
-    <div class="proj reveal" data-href="lego-ideas.html" role="link" tabindex="0">
+    <div class="proj reveal" data-href="lego-ideas.html" data-date="2021-03" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/lego-ideas.png" alt="LEGO Ideas"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">LEGO · Creative Design</p>
+        <p class="proj-type">LEGO · Creative Design · Spring 2021</p>
         <h2 class="proj-title">LEGO Ideas</h2>
         <p class="proj-desc">My siblings and I created a LEGO Ideas account to participate in LEGO contests and submit original builds in hopes of getting one turned into an official LEGO set.</p>
+        <div class="proj-stack"><span class="stack-tag">LEGO</span><span class="stack-tag">Creative Design</span></div>
         <a href="lego-ideas.html" class="proj-link">See more →</a>
       </div>
     </div>
 
-    <div class="proj right reveal" data-href="lego-room.html" role="link" tabindex="0">
+    <div class="proj right reveal" data-href="lego-room.html" data-date="2021-03" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/lego-room.jpg" alt="LEGO Room"/>
       </div>
       <div class="proj-body">
-        <p class="proj-type">LEGO · World-Building</p>
+        <p class="proj-type">LEGO · World-Building · Spring 2021</p>
         <h2 class="proj-title">LEGO Room</h2>
         <p class="proj-desc">An ongoing project with my siblings to build a complete "LEGO World" in our basement — a large-scale environment made up of many interconnected custom builds.</p>
+        <div class="proj-stack"><span class="stack-tag">LEGO</span><span class="stack-tag">World-Building</span></div>
         <a href="lego-room.html" class="proj-link">See more →</a>
       </div>
     </div>
@@ -269,12 +285,98 @@ function activateTab(tab, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('panel-' + tab).classList.add('active');
+  buildFilters(tab);
+  applyOrder(tab);
   document.querySelectorAll('#panel-' + tab + ' .reveal').forEach(el => {
     el.classList.remove('visible');
     setTimeout(() => observer.observe(el), 10);
   });
 }
 function switchTab(e, tab) { activateTab(tab, e.target.closest('.tab-btn')); }
+
+/* SORT BY DATE + TAG FILTERING (per tab, multi-select) */
+const activeTagFilters = { 'me-cs': new Set(), 'other': new Set() };
+const othersMenuOpen = { 'me-cs': false, 'other': false };
+
+function cardTags(card) {
+  return [...card.querySelectorAll('.stack-tag')].map(el => el.textContent.trim());
+}
+
+function applyOrder(tab) {
+  const list = document.querySelector('#panel-' + tab + ' .projects-list');
+  const cards = [...list.children];
+  const sorted = cards.slice().sort((a, b) => b.dataset.date.localeCompare(a.dataset.date));
+  sorted.forEach((card, i) => { card.style.order = i; });
+  const tags = activeTagFilters[tab];
+  const visible = sorted.filter(card => {
+    const cTags = cardTags(card);
+    return [...tags].every(t => cTags.includes(t));
+  });
+  sorted.forEach(card => { card.style.display = visible.includes(card) ? '' : 'none'; });
+  visible.forEach((card, i) => { card.classList.toggle('right', i % 2 === 1); });
+}
+
+const CATEGORY_TAGS = ['CS', 'MechE'];
+
+function buildFilters(tab) {
+  const list = document.querySelector('#panel-' + tab + ' .projects-list');
+  const tagSet = new Set();
+  [...list.children].forEach(card => cardTags(card).forEach(t => tagSet.add(t)));
+  const categoryTags = CATEGORY_TAGS.filter(t => tagSet.has(t));
+  const otherTags = [...tagSet].filter(t => !CATEGORY_TAGS.includes(t)).sort((a, b) => a.localeCompare(b));
+  const selected = activeTagFilters[tab];
+
+  const wrap = document.getElementById('tag-filters');
+  wrap.innerHTML = '';
+
+  const toggleFilter = tagValue => {
+    if (tagValue === null) { selected.clear(); }
+    else if (selected.has(tagValue)) { selected.delete(tagValue); }
+    else { selected.add(tagValue); }
+    buildFilters(tab);
+    applyOrder(tab);
+  };
+  const makeBtn = (label, tagValue) => {
+    const isActive = tagValue === null ? selected.size === 0 : selected.has(tagValue);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tag-filter-btn' + (isActive ? ' active' : '');
+    btn.textContent = label;
+    btn.addEventListener('click', () => toggleFilter(tagValue));
+    return btn;
+  };
+
+  const row = document.createElement('div');
+  row.className = 'tag-filter-row';
+  row.appendChild(makeBtn('All', null));
+  categoryTags.forEach(tag => row.appendChild(makeBtn(tag, tag)));
+  wrap.appendChild(row);
+
+  if (otherTags.length) {
+    const activeOtherCount = otherTags.filter(t => selected.has(t)).length;
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'tag-filter-btn' + (activeOtherCount ? ' active' : '');
+    row.appendChild(toggle);
+
+    const menu = document.createElement('div');
+    menu.className = 'tag-filter-menu';
+    menu.hidden = !othersMenuOpen[tab];
+    otherTags.forEach(tag => menu.appendChild(makeBtn(tag, tag)));
+    wrap.appendChild(menu);
+
+    const setToggleLabel = () => {
+      const label = activeOtherCount ? `Others (${activeOtherCount})` : 'Others';
+      toggle.textContent = label + (menu.hidden ? ' ▾' : ' ▴');
+    };
+    setToggleLabel();
+    toggle.addEventListener('click', () => {
+      othersMenuOpen[tab] = !othersMenuOpen[tab];
+      menu.hidden = !othersMenuOpen[tab];
+      setToggleLabel();
+    });
+  }
+}
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
@@ -285,6 +387,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 if (location.hash === '#other') {
   activateTab('other', document.querySelector('.tab-btn[onclick*="other"]'));
+} else {
+  buildFilters('me-cs');
+  applyOrder('me-cs');
 }
 
 document.querySelectorAll('.proj[data-href]').forEach(card => {
