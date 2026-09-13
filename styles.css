@@ -17,4 +17,16 @@ nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-betwe
 .project-page-title{font-family:var(--display);font-size:2rem;margin-bottom:0.5rem}
 .project-thumb{background:var(--surface2);border:1px solid var(--border);border-radius:4px;overflow:hidden}
 .project-body{margin-top:1rem}
+.source-content{max-width:780px;margin:2rem auto 0;display:grid;gap:1.5rem}
+.source-content p,.source-content li{color:var(--muted);line-height:1.75}
+.source-content a{color:var(--accent2)}
+.source-content h2{font-family:var(--display);font-size:1.35rem;line-height:1.3;margin:1rem 0 0}
+.source-block{display:grid;gap:1rem}
+.source-block + .source-block{margin-top:1rem}
+.source-block h3{font-family:var(--display);font-size:1.1rem;line-height:1.35}
+.source-block ul{padding-left:1.25rem;display:grid;gap:.5rem}
+.source-image-placeholder{min-height:220px;display:grid;place-items:center;padding:2rem;background:var(--surface2);border:1px dashed var(--accent);border-radius:4px;color:var(--accent2);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-align:center;text-transform:uppercase}
+.source-image-placeholder.wide{min-height:300px}
+.source-image{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:4px}
 .footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.68rem;color:var(--muted)}
+@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}

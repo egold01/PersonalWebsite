@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Homework1: Double Jump - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Homework1: Double Jump</h1>
+  <div class="source-content">
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>We were tasked with creating a gear system that translates a full 360 degree rotation into a 90 degree rotation.</p>
+    <p><strong>Solution:</strong></p>
+    <p>My partner and I decided to build a planetary gear system with three planet gears. We first used several online planetary gear generator tools to determine the number of teeth that the sun, planet, and ring gears should have in order to produce a 4:1 sun gear to ring gear output. We determined that the gears should have the following number of teeth:</p>
+    <p>Sun: 12 ; Planets: 18 ; Ring: 48</p>
+    <p>Next came the most challenging part of the assignment: modeling our own gears in CAD...</p>
+    <p>We decided to use Onshape CAD software. We pulled the pitch circle, pressure angle, addendum, and dedendum for each gear from the gear generator software and then using those values created a sketch of the relative gear positioning and all the important dimensions for each gear:</p>
+    <div class="source-image-placeholder">Image placeholder: gear dimensions sketch</div>
+    <p>Modeling the teeth was the most difficult part of designing the gears. The curve that defines the shape of a gear tooth is called an involute curve - a parametric curve who's shape is based off of the radius of the circle that it is drawn from. There is no tool in the standard Onshape library that allows you to draw parametric curves so instead we used a custom library designed by Onshape users Mahir and Llya Baran. It worked perfectly:</p>
+    <div class="source-image-placeholder">Image placeholder: involute gear curve</div>
+    <p>The rest of the design was fairly simple - using standard Onshape tools (mirror, extrude, etc) we were able to model the teeth:</p>
+    <div class="source-image-placeholder">Image placeholder: modeled gear teeth</div>
+    <p>And to verify that everything was meshing correctly, we animated the asembly in Onshape:</p>
+    <div class="source-image-placeholder">Image placeholder: Onshape animation</div>
+    <p>Finally, we laser cut the gears, assembled them, made it look Mario-Cart themed (the rainbow on the ring gear is Mario Cart's Rainbow Road, and the cart is driven by Yoshi), and tested it to make sure that we did turn 90 degrees for a 360 degree motor turn:</p>
+    <div class="source-image-placeholder">Image placeholder: completed Double Jump project</div>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>

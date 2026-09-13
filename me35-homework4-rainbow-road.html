@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Homework4: Rainbow Road - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Homework4: Rainbow Road</h1>
+  <div class="source-content">
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>Design and build a robot that can follow one or more colored lines using a camera and edge detection.</p>
+    <p><strong>Solution:</strong></p>
+    <p>I worked with Salvatore Novak to design a robot that uses one camera to follow a line using edge detection and path memorization/backtracking.</p>
+    <p>We used the same chassis for this robot that we used for our Homework 3 robot -- we just removed the color sensors and all of the related wiring and taped the pi to the front of the robot.</p>
+    <p>Before attaching the pi, we ran the base code provided by Professor Briana Bouchard and moved the camera around to find the optimal height at which the camera could perform the edge detection. Fortunately, that height was right around the height of the robot chassis so we were able to attach the camera directly to the top of the chassis without having to make any modifications to it.</p>
+    <div class="source-image-placeholder">Image placeholder: robot with camera</div>
+    <p>The base code provided already did the edge detection using a series of filters and calculations:</p>
+    <ol>
+      <li>Gaussian blur</li>
+      <li>Color thresholding</li>
+      <li>Find the contours of the frame</li>
+      <li>Find the biggest contour (if detected) -- this tells us where the line is</li>
+      <li>Calculate the "center of mass" of the part of the line that the camera is seeing and use that data to determine whether to go left right or straight</li>
+    </ol>
+    <p>We added code to turn the robot in the appropriate direction and voila...</p>
+    <p>In order to add an additional challenge, we implemented code that allows the robot to backtrack if it loses the line. The program keeps a list of the moves that it has performed, appending new moves to the front of the list. If the robot loses the line, it pops the command at the front of the list (the most recent move) and performs the opposite of that move, backtracking one move. The robot will continue to backtrack until it sees the line again.</p>
+    <p>One issue that we ran into when first implementing this algorithm was that the robot would suddenly backtrack when it still appeared to be on the line. We debugged by adding print statements and looking at the output of the code -- the issue was that in normal operation the robot every once in a while when it was right on the edge of the line would momentarily sense that it had lost the line and then see the line again and continue on its way. In order to avoid backtracking during this moments of indecision, we added a counter variable that begins to count when the robot goes off of the line. If the robot remains off of the line for 50 counts without moving off of the line then it is definitely off of the line and we need to backtrack. It worked!! :)</p>
+    <div class="source-image-placeholder">Image placeholder: Rainbow Road robot</div>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>

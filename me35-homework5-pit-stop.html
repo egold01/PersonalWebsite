@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Homework5: Pit Stop - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Homework5: Pit Stop</h1>
+  <div class="source-content">
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>Navigate a maze by remotely controlling an iRobot Create 3 robot with an Airtable API</p>
+    <p><strong>Code:</strong> <a href="https://github.com/egold01/ME35_Create3_Maze" target="_blank" rel="noopener">github.com/egold01/ME35_Create3_Maze</a></p>
+    <p>FlameRunner.py - code to read from and parse AirTable data</p>
+    <p>Move_FlameRunner.py - code to control movement of Create3 robot by publishing data to /cmd_vel topic. Uses FlameRunner.py to get values to publish from AirTable</p>
+    <p><strong>Solution:</strong></p>
+    <p>I worked with Cardi Mendez and Vibha Kamath to complete this challenge. The most difficult thing about this challenge was the code. I was new to APIs, ROS (which we used to control the Create3), and Create3s so learning how to interface them all together was a fun challenge!</p>
+    <p>At the end of the day, the basic setup was that we had an AirTable table open on a web browser which a python script constantly read from. Every time we read values from the table, a publisher would publish those value to the ROS /cmd_vel topic. The Create3 robot was subscribed to that topic and therefore was able to set its movement values to the most recent values published to the topic.</p>
+    <p>As simple as that sounds, getting to that point took several steps:</p>
+    <ol>
+      <li>First we created an AirTable table and made sure that we could read values from it. We did this in the FlameRunner.py script linked above</li>
+      <li>Then we figured out how to parse data from the json string that we read from the AirTable</li>
+      <li>When you publish to the /cmd_vel topic you send a Twist value which is composed of two Vector3s - one that controls the robots linear motion and one that controls the robots angular (rotational) motion. Therefore, we set up our AirTable to be a 2x3 table where each row represented either the linear or angular vector and each column the XYZ component of that vector</li>
+      <li>We are just learning how to use ROS and all of its data types (nodes, topics, etc) so in order to publish data to the /cmd_vel topic we took <a href="https://github.com/brianabouchard/me35sp24_students/blob/main/Create%203/LightringPublisher.py" target="_blank" rel="noopener">code provided by the class instructor</a> that published data to the Create3's /cmd_lightring topic and edited it to publish our data to the /cmd_vel topic</li>
+    </ol>
+    <p>IT WORKED!!! :)</p>
+    <p>Here's a video of us moving the robot around by changing the value on the AirTable. One cool thing to note in this video is that the Create3 and my computer are on two different networks and I can still control the robot!!! That's pretty cool!!</p>
+    <div class="source-image-placeholder wide">Video placeholder: remote robot control</div>
+    <p>And here's a (slightly sped up) video of our robot going through the maze! Vibha is controlling the robot remotely two floors above where the robot actually is!!</p>
+    <div class="source-image-placeholder wide">Video placeholder: robot maze run</div>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>

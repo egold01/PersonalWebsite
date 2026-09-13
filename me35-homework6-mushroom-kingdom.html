@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Homework6: Mushroom Kingdom Raceway - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Homework6: Mushroom Kingdom Raceway</h1>
+  <div class="source-content">
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>Move a Create3 robot through a maze of objects using a RaspberryPi camera trained on Google's Teachable Machine to determine how to navigate through the maze.</p>
+    <p><strong>Code:</strong> <a href="https://github.com/egold01/ME35_Create3_TeachableMachine_V2" target="_blank" rel="noopener">https://github.com/egold01/ME35_Create3_TeachableMachine_V2</a></p>
+    <p><strong>Solution:</strong></p>
+    <p>I worked with Josh Balbi and Luca Byrnes to complete this challenge.</p>
+    <p><strong>Code concepts:</strong></p>
+    <ul>
+      <li>The robot moves forward until it recognizes that it is 6in away from an object</li>
+      <li>It then uses the model from Google's Teachable Machine and images from the Pi's camera to identify the object in front of it</li>
+      <li>After identifying the object, it reads from an AirTable that tells it which way to turn (left or right 90deg) based on the object it is seeing. The AirTable is the only location where the turning direction of the robot for each object is specified so we could change this very easily (we didn't know what the maze looked like until right before we traversed it)</li>
+      <li>The robot then turns in the specified direction and continues on its merry way...</li>
+    </ul>
+    <p><strong>Difficulties with the code:</strong></p>
+    <ul>
+      <li>The Create3 that we had for the project tended to drift especially when countinuously stopping and starting after driving short distances. We therefore implemented a small tweak to the robot's movement to correct for the drift</li>
+    </ul>
+    <p><strong>Hardware and sensor placement:</strong></p>
+    <ul>
+      <li>We choose to place the Pi at a slightly elevated height at a slight angle in order to be able to see the object at the required 6in distance (some of the objects were pretty small)</li>
+      <li>We placed the ultrasonic sensor as close to the ground as we could because of how small some of the objects were</li>
+    </ul>
+    <div class="source-image-placeholder">Image placeholder: sensor and robot placement</div>
+    <p>Here's a sped up video of the robot navigating the maze. You'll see us moving the objects around in the video because of the drift issue that I explained above:</p>
+    <div class="source-image-placeholder wide">Video placeholder: Mushroom Kingdom Raceway</div>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>

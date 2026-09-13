@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Final Project: Automated Latte Making Machine - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Final Project: Automated Latte Making Machine</h1>
+  <div class="source-content">
+    <p>(Milk Dispensing and Frothing Team)</p>
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>As a class (27 people) work as a team to build an automated latte making machine that could make up to three lattes in a row without running out of materials. The latte should consist of coffee from a <a href="https://www.walmart.com/ip/Mixpresso-Espresso-Machine-for-Nespresso-Capsules-Programmable-Coffee-Maker-27-Oz-Black/569038751?wmlspartner=wlpa&selectedSellerId=128176" target="_blank" rel="noopener">Mixpresso coffee making machine</a>, steamed/frothed milk, and cinnamon art in a Mario Kart themed pattern.</p>
+    <p>We were given approximately one month to complete this task and a $500 budget.</p>
+    <p><strong>Solution:</strong></p>
+    <p>What we were given:</p>
+    <ul>
+      <li>Mixpresso Coffee Making Machine and coffee pods for the machine</li>
+      <li>Raspberry Pis</li>
+      <li>iRobot Create 3s</li>
+      <li>Assorted electronic components including limit switches and Raspberry Pi cameras</li>
+    </ul>
+    <p>We began the process by identifying the different tasks that had to be accomplished and then diving the class into teams to accomplish those tasks. The groups we choose to divide into were:</p>
+    <p><strong>TRANSPORT</strong></p>
+    <ul><li>Dispense an empty cup onto the transport mechanism to start the process and create a transport mechanism to move the cup between the different stations and finally deliver the cup to the customer</li></ul>
+    <p><strong>COFFEE</strong></p>
+    <ul><li>Load coffee pod into machine, start the machine, and dispense coffee into an empty cup</li></ul>
+    <p><strong>MILK</strong></p>
+    <ul><li>Dispense milk into a milk steamer/frother, start the frother, and dispense the frothed milk into the coffee cup</li></ul>
+    <p><strong>LATTE ART</strong></p>
+    <ul><li>Dispense cinnamon onto the coffee - the cinnamon should be dispensed in the shape of a Mario Kart character</li></ul>
+    <p>Here's an image of some of our original brainstorming from the first couple classes:</p>
+    <div class="source-image-placeholder">Image placeholder: brainstorming</div>
+    <p>Each team had a lot of freedom to decide how they went about accomplishing their tasks. However, in order to make the integration of the different parts of the robot easier, we specified what each team would receive and what their deliverable at the end of their process was expected to be. We also decided that in order to coordinate movement between teams, teams would read and write from/to an AirTable managed by the transport team.</p>
+    <p>I choose to work on the milk team. We broke our process up into the following sub goals:</p>
+    <ol>
+      <li>Pump milk from a milk bottle into the frother</li>
+      <li>Froth the milk</li>
+      <li>Pour the frothed milk into the coffee cup</li>
+    </ol>
+    <div class="source-image-placeholder">Image placeholder: milk team system</div>
+    <p>We originally were also tasked with cleaning the milk line with water after we had delivered the frothed milk. Our original plan to handle that challenge was to have the lines from the milk and water containers be joined together with a Y-fitting and have the pump sit beneath the fitting. A pinch valve on the milk and water lines above the Y-fitting would control which liquid (milk or water) would be pumped into the frother. However, we ended up dropping this requirement due to the fact that we purchased inexpensive pinch valves one of which failed and both of which had smaller than specified barbed fittings (thus our tubing did not fit correctly and we had to come up with a rushed solution that involved o-rings).</p>
+    <p>We did learn something from our battles with the pinch valves, however: make sure you read the reviews on Amazon before you make a purchase - both of the issues that we ran into were mentioned in the reviews :(</p>
+    <p>We did end up accomplishing the other goals though :)</p>
+    <p>Here are some pictures showing the final product for the milk team:</p>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 1</div>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 2</div>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 3</div>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 4</div>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 5</div>
+    <div class="source-image-placeholder">Image placeholder: milk team final product 6</div>
+    <p>Milk is pumped directly from a milk bottle. Our class voted to use oak milk</p>
+    <p>The milk runs through the one remaining good pinch valve and the pump. The pump had to be primed before it could run so we had to pre-fill the tubing with milk before starting the process</p>
+    <p>The milk is then pumped into the frother and a relay is used to turn on the frother and run the frothing process</p>
+    <p>Once the milk has been frothed, it is poured into the cup on top of the coffee.</p>
+    <p>The final milk team product!!! :)</p>
+    <p>And here's a video made by one of my classmates (Infania Pimentel) that shows how the entire system that the class made works together:</p>
+    <div class="source-image-placeholder wide">Video placeholder: complete latte machine</div>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
+<title>Homework3: Star Road - Ethan Goldman</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/favicon.jpg" alt="" class="nav-logo-icon"/>Ethan Goldman Portfolio</a>
+  <div class="nav-links"><a href="index.html#about">About</a><a href="projects.html">Projects</a></div>
+</nav>
+<main class="container project-hero">
+  <h1 class="project-page-title">Homework3: Star Road</h1>
+  <div class="source-content">
+    <div class="source-image-placeholder wide">Image placeholder: project carousel</div>
+    <p><strong>Goal:</strong></p>
+    <p>Design and build a robot that can follow one or more colored lines using a color sensor.</p>
+    <p><strong>Code:</strong></p>
+    <p><a href="https://github.com/egold01/ME35_LineFollower/tree/main" target="_blank" rel="noopener">https://github.com/egold01/ME35_LineFollower/tree/main</a></p>
+    <p><strong>Solution:</strong></p>
+    <p>I worked with Salvatore Novak to design a robot that uses two color sensors to follow a red line using proportional control.</p>
+    <p>We initially struggled to figure out exactly how we wanted to implement the PID control because it was conceptually confusing using PID with a problem that seems more like a binary problem (is the robot on or off the line). We eventually decided to take advantage of the fact that the color sensors that we were using (the <a href="https://www.dfrobot.com/product-540.html" target="_blank" rel="noopener">DFRobot Fermion: TCS3200 RGB Color Sensor (Breakout)</a>) do output arbitrary numeric RGB values of the colors that they are seeing. We decided that the sensors would be positioned one on each side of the the line and that they would be looking for "non-line" which was the color white. White reflects all light colors so we expected to have have values for RGB when the sensors were on "non-line" and have lower values when the sensors were on a line, creating an error that we could plug into the PID control and eventually convert to a PWM duty cycle for each wheel of the robot.</p>
+    <p>In order to attempt to simplify the interactions between the sensors and motors we decided that we would have one sensor and one motor on each side of the line and that the sensor and motor on different sides of the line would be a pair - when a sensor saw the line the opposite wheel would start to turn faster moving the sensor off of the line and turning the robot to follow the line.</p>
+    <p>We made a rough mock up of the robot structure in Onshape CAD software (see images below), mocked up and successfully tested the code for one sensor-motor pair, and started the assembly and testing process...</p>
+    <div class="source-image-placeholder">Image placeholder: robot CAD mockup</div>
+    <div class="source-image-placeholder">Image placeholder: sensor-motor assembly</div>
+    <div class="source-image-placeholder">Image placeholder: assembled robot</div>
+    <p>Unfortunately, our robot didn't work...</p>
+    <p>After some initial debugging of the code, we got our robot to follow fairly straight lines but on sharp turns the sensor that we supposed to get the robot to turn would overshoot the edge of the line and either get stuck on the line or just completely cross the line before the robot completed its turn operation to follow the line.</p>
+    <p>We managed our time a little poorly on this assignment so we didn't get the change to adjust the PID and other variables and more thoroughly debug this issue.</p>
+    <p>However, I did learn several interesting things from this project:</p>
+    <ul>
+      <li>How PID control works</li>
+      <li>Tuning a PID control is very difficult (even just the proportional bit)</li>
+      <li>Getting a color sensor to consistently read values for RGB is very difficult and getting two of them to do the same thing and interact with each other is even more difficult. (At the end of the day we may have just wanted to use one color sensor.)</li>
+    </ul>
+  </div>
+  <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
+</main>
+<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+</body>
+</html>
