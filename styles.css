@@ -43,6 +43,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-caption{margin-top:-1rem;color:var(--muted);font-family:var(--mono);font-size:.72rem;line-height:1.5;text-align:center}
 .source-caption a{color:var(--accent2)}
 .source-video{width:100%;display:block;border:1px solid var(--border);border-radius:4px;background:var(--surface2)}
+.source-document-preview{width:100%;height:680px;border:1px solid var(--border);border-radius:4px;background:var(--surface2)}
+.source-document-link{display:inline-block;font-family:var(--mono);font-size:.75rem;color:var(--accent2);text-decoration:none}
 .source-carousel{position:relative;overflow:hidden;background:var(--surface2);border:1px solid var(--border);border-radius:4px}
 .source-carousel-track{display:flex;transition:transform .3s ease}
 .source-carousel-slide{min-width:100%;margin:0}
@@ -55,4 +57,4 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-carousel-dot{width:.55rem;height:.55rem;padding:0;border:1px solid var(--muted);border-radius:50%;background:transparent;cursor:pointer}
 .source-carousel-dot.active{border-color:var(--accent);background:var(--accent)}
 .footer{padding:2rem;text-align:center;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.68rem;color:var(--muted)}
-@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}.source-image-row{grid-template-columns:1fr}.source-image-row .source-image{height:auto;aspect-ratio:auto!important}.source-image-story{grid-template-columns:1fr}.source-image-story p{font-size:.95rem}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}
+@media (max-width:700px){.container{padding-left:1.5rem;padding-right:1.5rem}.project-gallery{grid-template-columns:1fr}.source-image-row{grid-template-columns:1fr}.source-image-row .source-image{height:auto;aspect-ratio:auto!important}.source-image-story{grid-template-columns:1fr}.source-image-story p{font-size:.95rem}.source-document-preview{height:520px}nav{padding-left:1.5rem;padding-right:1.5rem}.nav-links{display:none}}

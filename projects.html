@@ -55,6 +55,7 @@
   .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.3s; }
   .proj:hover .proj-thumb img { opacity: 1; }
   .proj-thumb svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .proj-pdf-preview { width: 100%; height: 100%; min-height: 260px; border: 0; display: block; pointer-events: none; background: var(--surface2); }
   .proj-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
   .proj-type { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
   .proj-title { font-family: var(--display); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 0.85rem; }
@@ -196,25 +197,16 @@
     </div>
 
     <!-- CAD Pipe Intersection -->
-    <div class="proj reveal" data-href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/cad-pipe-intersection-with-calculus" role="link" tabindex="0">
+    <div class="proj reveal" data-href="cad-pipe-intersection.html" role="link" tabindex="0">
       <div class="proj-thumb">
-        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="400" height="260" fill="#1E2024"/>
-          <g stroke="#3B8BEB" fill="none" opacity="0.55">
-            <ellipse cx="200" cy="130" rx="90" ry="50" stroke-width="1.5" stroke-dasharray="7,4"/>
-            <ellipse cx="200" cy="130" rx="90" ry="50" stroke-width="1.5" transform="rotate(90 200 130)" stroke-dasharray="7,4" opacity="0.6"/>
-            <line x1="110" y1="130" x2="290" y2="130" stroke-width="0.8" opacity="0.4"/>
-            <line x1="200" y1="80" x2="200" y2="180" stroke-width="0.8" opacity="0.4"/>
-          </g>
-          <text x="200" y="136" text-anchor="middle" class="ph-label">[ pipe intersection model ]</text>
-        </svg>
+        <iframe class="proj-pdf-preview" src="images/ElectricKnife/Ethan%20Goldman%202D%20and%203D%20Pipe%20Intersection.pdf#page=1&zoom=page" title="CAD Pipe Intersection PDF preview"></iframe>
       </div>
       <div class="proj-body">
         <p class="proj-type">CAD · Onshape · Math</p>
         <h2 class="proj-title">CAD Pipe Intersection (with Calculus)</h2>
         <p class="proj-desc">Used Onshape to model and visualize the perpendicular intersection between two pipes of equal radius, then analytically calculated the exact volume of the intersection using calculus.</p>
         <div class="proj-stack"><span class="stack-tag">Onshape</span><span class="stack-tag">CAD</span><span class="stack-tag">Calculus</span></div>
-        <a href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/cad-pipe-intersection-with-calculus" target="_blank" class="proj-link">See more →</a>
+        <a href="cad-pipe-intersection.html" class="proj-link">See more →</a>
       </div>
     </div>
 
