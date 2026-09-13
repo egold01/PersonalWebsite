@@ -45,8 +45,9 @@
 
   /* PROJECT CARDS */
   .projects-list { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; display: flex; flex-direction: column; gap: 2rem; }
-  .proj { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 400px 1fr; transition: border-color 0.25s; }
+  .proj { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: grid; grid-template-columns: 400px 1fr; transition: border-color 0.25s; cursor: pointer; }
   .proj:hover { border-color: var(--accent); }
+  .proj:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
   .proj.right { grid-template-columns: 1fr 400px; }
   .proj.right .proj-thumb { order: 2; }
   .proj.right .proj-body { order: 1; }
@@ -63,18 +64,6 @@
   .proj-link { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; width: fit-content; }
   .proj:hover .proj-link { gap: 0.7rem; }
 
-  /* LEGO GRID — two-column card layout */
-  .lego-grid { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 3rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .lego-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
-  .lego-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .lego-card-thumb { background: var(--surface2); aspect-ratio: 16/9; overflow: hidden; }
-  .lego-card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
-  .lego-card:hover .lego-card-thumb img { opacity: 1; }
-  .lego-card-body { padding: 1.75rem; }
-  .lego-card .proj-type { margin-bottom: 0.4rem; }
-  .lego-card .proj-title { font-size: 1.2rem; margin-bottom: 0.6rem; }
-  .lego-card .proj-desc { margin-bottom: 1.25rem; }
-
   .ph-label { fill: #3B8BEB; font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.45; }
 
   footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
@@ -86,8 +75,7 @@
     .proj, .proj.right { grid-template-columns: 1fr; }
     .proj.right .proj-thumb, .proj.right .proj-body { order: unset; }
     .proj-thumb { min-height: 200px; }
-    .lego-grid { grid-template-columns: 1fr; }
-    .tabs-wrap, .projects-list, .lego-grid, .page-header { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .tabs-wrap, .projects-list, .page-header { padding-left: 1.5rem; padding-right: 1.5rem; }
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
   }
@@ -124,7 +112,7 @@
   <div class="projects-list">
 
     <!-- ME35 Robotics -->
-    <div class="proj reveal">
+    <div class="proj reveal" data-href="me35-robotics.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/me35-robotics.jpg" alt="ME35 Robotics"/>
       </div>
@@ -138,7 +126,7 @@
     </div>
 
     <!-- Custom PCB -->
-    <div class="proj right reveal">
+    <div class="proj right reveal" data-href="custom-pcb-design.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/custom-pcb.jpg" alt="Custom PCB"/>
       </div>
@@ -152,7 +140,7 @@
     </div>
 
     <!-- Electric Knife -->
-    <div class="proj reveal">
+    <div class="proj reveal" data-href="electric-knife.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/electric-knife.jpg" alt="Electric Knife Teardown"/>
       </div>
@@ -166,7 +154,7 @@
     </div>
 
     <!-- San Siro -->
-    <div class="proj right reveal">
+    <div class="proj right reveal" data-href="san-siro-stadium.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/san-siro.jpg" alt="San Siro Stadium"/>
       </div>
@@ -180,7 +168,7 @@
     </div>
 
     <!-- Microwave Control Panel -->
-    <div class="proj reveal">
+    <div class="proj reveal" data-href="microwave-control-panel.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/microwave-control-panel.jpg" alt="Microwave Control Panel"/>
       </div>
@@ -194,7 +182,7 @@
     </div>
 
     <!-- CAD Train -->
-    <div class="proj right reveal">
+    <div class="proj right reveal" data-href="cad-train.html" role="link" tabindex="0">
       <div class="proj-thumb">
         <img src="images/cad-train.jpg" alt="CAD Train"/>
       </div>
@@ -208,7 +196,7 @@
     </div>
 
     <!-- CAD Pipe Intersection -->
-    <div class="proj reveal">
+    <div class="proj reveal" data-href="https://sites.google.com/view/ethan-h-goldman/projects-cs-me/cad-pipe-intersection-with-calculus" role="link" tabindex="0">
       <div class="proj-thumb">
         <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
           <rect width="400" height="260" fill="#1E2024"/>
@@ -235,16 +223,13 @@
 
 <!-- ── OTHER TAB ── -->
 <div class="tab-panel" id="panel-other">
-  <div class="projects-list" style="margin-bottom:1rem;">
-    <p style="font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:1;">// LEGOs</p>
-  </div>
-  <div class="lego-grid">
+  <div class="projects-list">
 
-    <div class="lego-card reveal">
-      <div class="lego-card-thumb">
+    <div class="proj reveal" data-href="lego-ideas.html" role="link" tabindex="0">
+      <div class="proj-thumb">
         <img src="images/lego-ideas.png" alt="LEGO Ideas"/>
       </div>
-      <div class="lego-card-body">
+      <div class="proj-body">
         <p class="proj-type">LEGO · Creative Design</p>
         <h2 class="proj-title">LEGO Ideas</h2>
         <p class="proj-desc">My siblings and I created a LEGO Ideas account to participate in LEGO contests and submit original builds in hopes of getting one turned into an official LEGO set.</p>
@@ -252,11 +237,11 @@
       </div>
     </div>
 
-    <div class="lego-card reveal">
-      <div class="lego-card-thumb">
+    <div class="proj right reveal" data-href="lego-room.html" role="link" tabindex="0">
+      <div class="proj-thumb">
         <img src="images/lego-room.jpg" alt="LEGO Room"/>
       </div>
-      <div class="lego-card-body">
+      <div class="proj-body">
         <p class="proj-type">LEGO · World-Building</p>
         <h2 class="proj-title">LEGO Room</h2>
         <p class="proj-desc">An ongoing project with my siblings to build a complete "LEGO World" in our basement — a large-scale environment made up of many interconnected custom builds.</p>
@@ -304,6 +289,19 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.proj[data-href]').forEach(card => {
+  const openProject = () => { window.location.href = card.dataset.href; };
+  card.addEventListener('click', event => {
+    if (!event.target.closest('a')) openProject();
+  });
+  card.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openProject();
+    }
+  });
+});
 </script>
 </body>
 </html>
