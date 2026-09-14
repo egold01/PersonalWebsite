@@ -21,9 +21,27 @@
 <main class="container project-hero">
   <h1 class="project-page-title">LabVIEW Pressure Distribution Analysis with Load Cells</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: load cell pressure distribution rig</div>
-    <p>In the spring of 2024 I worked on a LabVIEW project analyzing pressure distribution using an array of load cells.</p>
-    <p><em>TODO: full write-up coming soon — the Google Doc (1LFecYJH43RD2WNnKP0XWNpUAs-wYQ5GznnaS1HLQ2S4) returned a 401 Unauthorized when fetched automatically, so it's set to private. Either share it publicly (or with "anyone with the link") so it can be read, or paste the text directly.</em></p>
+    <div class="source-image-placeholder wide">Image placeholder: load cell array mounted in the Converse shoe insole</div>
+    <p>In the spring of 2024 I took ME70: Experiments/Instruments at Tufts. For our final project, my team (Tyler Mackowski, Carolyn Thompson, Madanna Vue, and I) built a foot pressure sensor out of an array of load cells and used it to see how pressure shifts around the foot when standing on an incline, a decline, and flat ground.</p>
+    <p>We wired six 50 kg load cells into the insole of a Converse sneaker — one at the big toe, one at the ball of the foot, one at the midfoot, and the rest around the heel. Each load cell works like a Wheatstone bridge, so its signal is too small to read directly — every sensor needed its own HX711 amplifier (a precision 24-bit ADC) to boost that signal before it reached the ESP32. The ESP32 itself didn't do much beyond reading the sensors and relaying the raw values out over serial — the real work happened on the LabVIEW side, which handled calibrating each sensor, converting readings into kilograms, and generating the pressure heat maps.</p>
+    <div class="source-image-row">
+      <div class="source-image-placeholder">Image placeholder: load cell + HX711 wiring diagram</div>
+      <div class="source-image-placeholder">Image placeholder: load cells mounted into the shoe insole</div>
+    </div>
+    <p><strong>The LabVIEW Code:</strong></p>
+    <p>I calibrated each load cell individually by feeding it known 1, 3, and 5 kg loads and fitting a line to convert its raw readings into kilograms, then wrote the LabVIEW program that reads all six sensors live, applies each one's calibration, and renders the result as a real-time foot pressure heat map.</p>
+    <div class="source-image-placeholder wide">Image placeholder: LabVIEW block diagram</div>
+    <p><em>TODO: add a link to the LabVIEW/Arduino code here, matching the pattern used on the Microwave Control Panel page.</em></p>
+    <p><strong>Testing:</strong></p>
+    <p>We tested three conditions — a 6.6° incline, a 6.6° decline, and flat ground — with someone standing still on the sensor for about 30-60 seconds each time.</p>
+    <div class="source-image-row">
+      <div class="source-image-placeholder">Image placeholder: incline test setup</div>
+      <div class="source-image-placeholder">Image placeholder: decline test setup</div>
+    </div>
+    <p><strong>Results:</strong></p>
+    <p>Standing on the incline pushed most of the pressure into the heel. On the decline it shifted toward the front of the foot, though the heel stayed surprisingly loaded too. On flat ground it spread out more evenly, with a bit more weight in the midfoot. The data was noisier than I'd like, so I'd call these results suggestive rather than conclusive, but they lined up with what we expected going in.</p>
+    <div class="source-image-placeholder wide">Image placeholder: uphill, downhill, and flat foot pressure heat maps</div>
+    <p>Our main takeaway: shoes with more arch support would probably help spread that pressure out more evenly, especially on a slope. Next steps if I kept working on it would be better sensor calibration, testing more incline angles, and moving from standing still to actually walking.</p>
   </div>
   <p><a href="projects.html" class="btn">← Back to projects</a></p>
 </main>

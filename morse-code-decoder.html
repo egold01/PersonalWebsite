@@ -21,12 +21,18 @@
 <main class="container project-hero">
   <h1 class="project-page-title">Morse Code Decoder</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: Morse code decoder setup</div>
     <p>During the summer of 2020 I worked at the Tufts Center for Engineering Education and Outreach (CEEO), where I was placed on the AI team with the goal of creating projects for the LEGO SPIKE Prime that incorporated AI algorithms. My first project was a Morse code decoder.</p>
     <p>The decoder uses the k-nearest neighbor algorithm to categorize button presses of different lengths as either dots or dashes. By recognizing the timing intervals between presses, the program can translate a sequence of Morse code input into its component English letters, words, and sentences.</p>
-    <div class="source-image-placeholder">Image placeholder: k-nearest neighbor classification of dots and dashes</div>
+    <div class="source-image-row">
+      <img class="source-image" src="images/MorseCode/Dot.jpg" alt="Short button press classified as a dot"/>
+      <img class="source-image" src="images/MorseCode/Dash.jpg" alt="Long button press classified as a dash"/>
+    </div>
+    <p class="source-caption">Left: a short press, classified as a dot. Right: a long press, classified as a dash.</p>
     <p>To see the Morse Code Decoder in action please check out the video below:</p>
-    <div class="source-image-placeholder wide">Video placeholder: Morse Code Detector V1.mp4</div>
+    <video class="source-video" controls preload="metadata">
+      <source src="images/MorseCode/Morse%20Code%20Detector%20V1.mp4" type="video/mp4"/>
+      Your browser does not support this video format.
+    </video>
   </div>
   <p><a href="projects.html" class="btn">← Back to projects</a></p>
 </main>

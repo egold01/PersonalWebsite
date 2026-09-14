@@ -21,14 +21,51 @@
 <main class="container project-hero">
   <h1 class="project-page-title">Basketball Shooter</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: SPIKE basketball shooter device</div>
-    <p>When I worked at Tufts CEEO in the summer of 2020, I was placed on the AI team with the goal of creating projects using the LEGO SPIKE Prime which incorporated AI algorithms. One of these projects was an intelligent basketball shooting device.</p>
+    <div class="source-carousel" data-carousel>
+      <div class="source-carousel-track">
+        <figure class="source-carousel-slide"><img src="images/BasketballShooter/carousel1.png" alt="SPIKE basketball shooter, full device"/></figure>
+        <figure class="source-carousel-slide"><img src="images/BasketballShooter/carousel2.png" alt="SPIKE basketball shooter, launch arm and sensor"/></figure>
+        <figure class="source-carousel-slide"><img src="images/BasketballShooter/carousel3.png" alt="SPIKE basketball shooter, motor and arm assembly"/></figure>
+        <figure class="source-carousel-slide"><img src="images/BasketballShooter/carousel4.png" alt="SPIKE basketball shooter, hoop and distance sensor"/></figure>
+      </div>
+      <button class="source-carousel-button previous" type="button" data-carousel-previous aria-label="Previous image">&#8249;</button>
+      <button class="source-carousel-button next" type="button" data-carousel-next aria-label="Next image">&#8250;</button>
+      <div class="source-carousel-dots" aria-label="Choose basketball shooter image">
+        <button class="source-carousel-dot active" type="button" data-carousel-dot="0" aria-label="Show image 1" aria-current="true"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="1" aria-label="Show image 2"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="2" aria-label="Show image 3"></button>
+        <button class="source-carousel-dot" type="button" data-carousel-dot="3" aria-label="Show image 4"></button>
+      </div>
+    </div>
+    <p>When I worked at Tufts CEEO in the summer of 2020, I was placed on the AI team with the goal of creating projects using the LEGO SPIKE Prime which incorporated AI algorithms. One of these projects was the intelligent basketball shooting device pictured above.</p>
     <p>The AI program uses the linear regression algorithm to calculate the angle at which to launch the ball. Users record data points comparing the distance from the hoop (the independent variable) against the shooting angle needed to score (the dependent variable), which the algorithm then uses to predict the optimal launch angle for any given distance.</p>
     <p>To see the Basketball Shooter in action please check out the video below:</p>
-    <div class="source-image-placeholder wide">Video placeholder: SPIKE Basketball Shooter V1.mp4</div>
+    <video class="source-video" controls preload="metadata">
+      <source src="images/BasketballShooter/SPIKE%20Basketball%20Shooter%20V1.mp4" type="video/mp4"/>
+      Your browser does not support this video format.
+    </video>
   </div>
   <p><a href="projects.html" class="btn">← Back to projects</a></p>
 </main>
 <footer class="footer">© 2026 Ethan Goldman — Engineered with intent.</footer>
+<script>
+document.querySelectorAll('[data-carousel]').forEach(carousel => {
+  const track = carousel.querySelector('.source-carousel-track');
+  const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
+  let currentSlide = 0;
+  const showSlide = slide => {
+    currentSlide = (slide + dots.length) % dots.length;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, index) => {
+      const active = index === currentSlide;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  };
+  carousel.querySelector('[data-carousel-previous]').addEventListener('click', () => showSlide(currentSlide - 1));
+  carousel.querySelector('[data-carousel-next]').addEventListener('click', () => showSlide(currentSlide + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.carouselDot))));
+});
+</script>
 </body>
 </html>
