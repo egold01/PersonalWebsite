@@ -21,9 +21,10 @@
 <main class="container project-hero">
   <h1 class="project-page-title">Senior Design: Kaleidosphere</h1>
   <div class="source-content">
-    <div class="source-image-placeholder wide">Image placeholder: finished Kaleidosphere</div>
+    <img class="source-image" src="images/SeniorDesign/FinishedKaleidoshphere.png" alt="Finished Kaleidosphere"/>
     <p>In the fall of 2024 I took ME74: Senior Design Capstone at Tufts. My team — Tyler Pisinski, May Wildgrube, and I — worked with Professor James Intriligator to turn one of his concepts, which he called "Moiré Spheres," into an actual manufacturable toy. We ended up calling it the Kaleidosphere.</p>
     <p>A moiré pattern is the shifting visual effect you get when two grids or line patterns overlap at an angle — think of two window screens stacked slightly askew. Professor Intriligator wanted to take that normally flat, 2D effect and put it on a sphere kids could hold and roll around, both as a fun toy and as a way to build spatial reasoning skills.</p>
+    <img class="source-image" src="images/SeniorDesign/MoirePatternExample.png" alt="Example of a moiré pattern created by overlapping grids"/>
     <p><strong>The Concept:</strong></p>
     <p>The trick to making a moiré pattern happen on a sphere you're holding is that you need two patterned surfaces moving relative to each other. Our solution was a sphere within a sphere: a weighted inner sphere that stays oriented one way due to gravity, floating inside a water-filled outer sphere that spins freely around it. Roll or rotate the toy, and the patterns on the two spheres slide past each other, creating a moving moiré effect.</p>
     <p><strong>Design Goals:</strong></p>
@@ -31,22 +32,33 @@
     <p><strong>Two Prototypes:</strong></p>
     <p>We built two very different versions. The first was a quick proof-of-concept made from clear plastic Christmas ornaments: we painted and weighted the inner sphere, taped on patterns with black vinyl, then sealed water between the two halves by assembling them fully submerged underwater. It was cheap and let us confirm the moiré effect actually worked, but it leaked, was entirely hand-assembled, and had no path to being manufactured at scale.</p>
     <div class="source-image-row">
-      <div class="source-image-placeholder">Image placeholder: Christmas-ornament prototype sketch</div>
-      <div class="source-image-placeholder">Image placeholder: injection-molded design sketch</div>
+      <img class="source-image" src="images/SeniorDesign/ChristmasOrnamentSketch.png" alt="Christmas-ornament prototype concept sketch"/>
+      <img class="source-image" src="images/SeniorDesign/MoldedDesignSketch.png" alt="Injection-molded design concept sketch"/>
     </div>
-    <p>The second version was built around actual production: injection-molded spheres with a locking weight mechanism molded right in, and hydro-dipping (the same process used to put patterns on things like phone cases) instead of tape to apply the moiré patterns. We scored both designs against each other with a weighted decision matrix, and the injection-molded version won by a wide margin on durability, manufacturability, and safety.</p>
+    <p>The second version was built around actual production: injection-molded spheres with a weight locking mechanism molded right in, and hydro-dipping (the same process used to put patterns on things like phone cases) instead of tape to apply the moiré patterns. We scored both designs against each other with a weighted decision matrix, and the injection-molded version won by a wide margin on durability, manufacturability, and safety.</p>
+    <img class="source-image" src="images/SeniorDesign/Design%20Matrix.png" alt="Weighted decision matrix comparing the two prototypes"/>
     <p><strong>The Final Design:</strong></p>
     <p>The production-intent design uses polycarbonate for both spheres — clear and tough enough to survive being dropped by a kid — with hydro-dipped patterns on the inner sphere's outside and the outer sphere's inside. The water between them does double duty: it keeps the inner sphere's weight-based orientation stable while letting the outer sphere spin around it almost frictionlessly.</p>
-    <div class="source-image-placeholder wide">Image placeholder: labeled cross-section of assembled Kaleidosphere</div>
+    <img class="source-image" src="images/SeniorDesign/FinalDesign%20Cross%20Section.png" alt="Labeled cross-section of the assembled Kaleidosphere"/>
     <p><strong>Manufacturing Challenges:</strong></p>
-    <p>Being honest about where this stood at the end of the semester: injection molding a sphere turned out to be a lot harder than we expected. Molten plastic doesn't flow evenly around a spherical cavity the way it does around simpler shapes, and our in-house equipment couldn't even reach the melting temperature polycarbonate needs, so we had to prototype in polypropylene instead — weaker and less clear than what the final product should actually use. Even with that substitution, our molding attempts didn't produce usable parts by the end of the project. If I picked this back up, the next steps would be running a proper CFD simulation of the mold flow, getting access to equipment that can actually reach polycarbonate temperatures, and redesigning the mold (probably with multiple injection points) to handle the sphere's geometry better.</p>
+    <p>Injection molding a sphere turned out to be a lot harder than we expected. Molten plastic doesn't flow evenly around a spherical cavity the way it does around simpler shapes, and our in-house equipment couldn't even reach the melting temperature polycarbonate needs, so we had to prototype in polypropylene instead — weaker and less clear than what the final product should actually use.</p>
+    <div class="source-image-row">
+      <img class="source-image" src="images/SeniorDesign/Mold.jpeg" alt="Aluminum injection mold halves for the Kaleidosphere"/>
+      <img class="source-image" src="images/SeniorDesign/MoldWithFailedPart.jpeg" alt="Mold with a failed injection-molded part still inside it"/>
+    </div>
+    <p>Even with that substitution, our molding attempts didn't produce usable parts by the end of the project.</p>
+    <img class="source-image" src="images/SeniorDesign/FailedInjectionMoldedParts.jpeg" alt="A collection of failed injection-molded prototype parts"/>
+    <p>If I picked this back up, the next steps would be running a proper CFD simulation of the mold flow, getting access to equipment that can actually reach polycarbonate temperatures, and redesigning the mold (probably with multiple injection points) to handle the sphere's geometry better.</p>
     <p><strong>Validation:</strong></p>
-    <p>Without working injection-molded parts, our real validation came from the earlier prototype and an informal test at the Senior Design showcase, where a professor's son picked up the toy and was completely absorbed by it — exactly the kind of reaction we were hoping the moiré effect would get out of a kid. It was a small sample size, but it was a good sign that the core idea behind the toy actually works.</p>
+    <p>Without working injection-molded parts, we had to demo the earlier "Christmas Ornament" prototype at our Senior Design showcase. At the showcase, a professor's son picked up the toy and was completely absorbed by it — exactly the kind of reaction we were hoping the moiré effect would get out of a kid. It was a small sample size, but it was a good sign that the core idea behind the toy actually works.</p>
     <p>Here's a short video summarizing the whole project:</p>
     <video class="source-video" controls preload="metadata">
       <source src="images/SeniorDesign/Senior%20Design%20Kaleidosphere%20Final%20Report%20Video%20-%20Made%20with%20Clipchamp_1734570047520%20(1).mp4" type="video/mp4"/>
       Your browser does not support this video format.
     </video>
+    <p>The full final report, with all the engineering requirements, competitive benchmarking, and bill of materials, is below:</p>
+    <iframe class="source-document-preview" src="images/SeniorDesign/ME74%20Final%20Report.pdf" title="ME74 Kaleidospheres Final Report PDF"></iframe>
+    <a class="source-document-link" href="images/SeniorDesign/ME74%20Final%20Report.pdf" target="_blank" rel="noopener">Open the full ME74 final report</a>
   </div>
   <p><a href="projects.html" class="btn">← Back to projects</a></p>
 </main>
