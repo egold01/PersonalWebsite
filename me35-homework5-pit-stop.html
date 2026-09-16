@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
-<title>Homework5: Pit Stop - Ethan Goldman</title>
+<title>Homework5: Pit Stop — Ethan Goldman</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <p><strong>Goal:</strong></p>
-    <p>Navigate a maze by remotely controlling an iRobot Create 3 robot with an Airtable API</p>
+    <p>Navigate a maze by remotely controlling an iRobot Create 3 robot with an Airtable API.</p>
     <p><strong>Code:</strong> <a href="https://github.com/egold01/ME35_Create3_Maze" target="_blank" rel="noopener">github.com/egold01/ME35_Create3_Maze</a></p>
     <p>FlameRunner.py - code to read from and parse AirTable data</p>
     <p>Move_FlameRunner.py - code to control movement of the Create3 robot by publishing data to the /cmd_vel topic. Uses FlameRunner.py to get values to publish from AirTable</p>
@@ -47,7 +47,7 @@
     <ol>
       <li>First we created an AirTable table and made sure that we could read values from it. We did this in the FlameRunner.py script linked above</li>
       <li>Then we figured out how to parse data from the json string that we read from the AirTable</li>
-      <li>When you publish to the /cmd_vel topic you send a Twist value which is composed of two Vector3s - one that controls the robots linear motion and one that controls the robots angular (rotational) motion. Therefore, we set up our AirTable to be a 2x3 table where each row represented either the linear or angular vector and each column the XYZ component of that vector</li>
+      <li>When you publish to the /cmd_vel topic you send a Twist value which is composed of two Vector3s - one that controls the robot's linear motion and one that controls the robot's angular (rotational) motion. Therefore, we set up our AirTable to be a 2x3 table where each row represented either the linear or angular vector and each column the XYZ component of that vector</li>
       <li>We are just learning how to use ROS and all of its data types (nodes, topics, etc) so in order to publish data to the /cmd_vel topic we took <a href="https://github.com/brianabouchard/me35sp24_students/blob/main/Create%203/LightringPublisher.py" target="_blank" rel="noopener">code provided by the class instructor</a> that published data to the Create3's /cmd_lightring topic and edited it to publish our data to the /cmd_vel topic</li>
     </ol>
     <p>IT WORKED!!! :)</p>
@@ -64,7 +64,7 @@
   </div>
   <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
 </main>
-<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+<footer class="footer">© 2026 Ethan Goldman — Engineered with intent.</footer>
 <script>
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const track = carousel.querySelector('.source-carousel-track');

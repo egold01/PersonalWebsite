@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
-<title>Homework3: Star Road - Ethan Goldman</title>
+<title>Homework3: Star Road — Ethan Goldman</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -41,7 +41,7 @@
     <p><a href="https://github.com/egold01/ME35_LineFollower/tree/main" target="_blank" rel="noopener">https://github.com/egold01/ME35_LineFollower/tree/main</a></p>
     <p><strong>Solution:</strong></p>
     <p>I worked with Salvatore Novak to design a robot that uses two color sensors to follow a red line using proportional control.</p>
-    <p>We initially struggled to figure out exactly how we wanted to implement the PID control because it was conceptually confusing using PID with a problem that seems more like a binary problem (is the robot on or off the line). We eventually decided to take advantage of the fact that the color sensors that we were using (the <a href="https://www.dfrobot.com/product-540.html" target="_blank" rel="noopener">DFRobot Fermion: TCS3200 RGB Color Sensor (Breakout)</a>) do output arbitrary numeric RGB values of the colors that they are seeing. We decided that the sensors would be positioned one on each side of the the line and that they would be looking for "non-line" which was the color white. White reflects all light colors so we expected to have have values for RGB when the sensors were on "non-line" and have lower values when the sensors were on a line, creating an error that we could plug into the PID control and eventually convert to a PWM duty cycle for each wheel of the robot.</p>
+    <p>We initially struggled to figure out exactly how we wanted to implement the PID control because it was conceptually confusing using PID with a problem that seems more like a binary problem (is the robot on or off the line). We eventually decided to take advantage of the fact that the color sensors that we were using (the <a href="https://www.dfrobot.com/product-540.html" target="_blank" rel="noopener">DFRobot Fermion: TCS3200 RGB Color Sensor (Breakout)</a>) do output arbitrary numeric RGB values of the colors that they are seeing. We decided that the sensors would be positioned one on each side of the line and that they would be looking for "non-line" which was the color white. White reflects all light colors so we expected to have high values for RGB when the sensors were on "non-line" and have lower values when the sensors were on a line, creating an error that we could plug into the PID control and eventually convert to a PWM duty cycle for each wheel of the robot.</p>
     <p>In order to attempt to simplify the interactions between the sensors and motors we decided that we would have one sensor and one motor on each side of the line and that the sensor and motor on different sides of the line would be a pair - when a sensor saw the line the opposite wheel would start to turn faster moving the sensor off of the line and turning the robot to follow the line.</p>
     <p>We made a rough mock up of the robot structure in Onshape CAD software (see images below), mocked up and successfully tested the code for one sensor-motor pair, and started the assembly and testing process...</p>
     <img class="source-image" src="images/ME-35/Homework-3/CADMockUp1.png" alt="Star Road robot CAD mockup"/>
@@ -59,7 +59,7 @@
   </div>
   <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
 </main>
-<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+<footer class="footer">© 2026 Ethan Goldman — Engineered with intent.</footer>
 <script>
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const track = carousel.querySelector('.source-carousel-track');

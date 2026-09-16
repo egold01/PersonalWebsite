@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg"/>
-<title>Homework4: Rainbow Road - Ethan Goldman</title>
+<title>Homework4: Rainbow Road — Ethan Goldman</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -50,7 +50,7 @@
       <li>Color thresholding</li>
       <li>Find the contours of the frame</li>
       <li>Find the biggest contour (if detected) -- this tells us where the line is</li>
-      <li>Calculate the "center of mass" of the part of the line that the camera is seeing and use that data to determine whether to go left right or straight</li>
+      <li>Calculate the "center of mass" of the part of the line that the camera is seeing and use that data to determine whether to go left, right, or straight</li>
     </ol>
     <p>We added code to turn the robot in the appropriate direction and voila...</p>
     <video class="source-video" controls preload="metadata">
@@ -58,12 +58,12 @@
       Your browser does not support this video format.
     </video>
     <p>In order to add an additional challenge, we implemented code that allows the robot to backtrack if it loses the line. The program keeps a list of the moves that it has performed, appending new moves to the front of the list. If the robot loses the line, it pops the command at the front of the list (the most recent move) and performs the opposite of that move, backtracking one move. The robot will continue to backtrack until it sees the line again.</p>
-    <p>One issue that we ran into when first implementing this algorithm was that the robot would suddenly backtrack when it still appeared to be on the line. We debugged by adding print statements and looking at the output of the code -- the issue was that in normal operation the robot every once in a while when it was right on the edge of the line would momentarily sense that it had lost the line and then see the line again and continue on its way. In order to avoid backtracking during this moments of indecision, we added a counter variable that begins to count when the robot goes off of the line. If the robot remains off of the line for 50 counts without moving off of the line then it is definitely off of the line and we need to backtrack. It worked!! :)</p>
+    <p>One issue that we ran into when first implementing this algorithm was that the robot would suddenly backtrack when it still appeared to be on the line. We debugged by adding print statements and looking at the output of the code -- the issue was that in normal operation the robot every once in a while when it was right on the edge of the line would momentarily sense that it had lost the line and then see the line again and continue on its way. In order to avoid backtracking during these moments of indecision, we added a counter variable that begins to count when the robot goes off of the line. If the robot remains off of the line for 50 counts without moving off of the line then it is definitely off of the line and we need to backtrack. It worked!! :)</p>
     <img class="source-image" src="images/ME-35/Homework-4/RainbowRoadRobot.jpg" alt="Rainbow Road robot"/>
   </div>
   <p><a href="me35-robotics.html" class="btn">Back to ME35 Portfolio</a></p>
 </main>
-<footer class="footer">© 2026 Ethan Goldman - Engineered with intent.</footer>
+<footer class="footer">© 2026 Ethan Goldman — Engineered with intent.</footer>
 <script>
 document.querySelectorAll('[data-carousel]').forEach(carousel => {
   const track = carousel.querySelector('.source-carousel-track');

@@ -75,7 +75,6 @@
   .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.3s; }
   .project-card:hover .project-thumb img { opacity: 1; }
   .project-card.featured .project-thumb { aspect-ratio: auto; min-height: 280px; }
-  .placeholder-svg { width: 100%; height: 100%; position: absolute; inset: 0; }
   .project-info { padding: 1.75rem; }
   .project-type { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
   .project-title { font-family: var(--display); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.25; }
@@ -219,49 +218,41 @@
   <h2 class="section-title reveal">Projects</h2>
   <div class="projects-grid">
 
-    <div class="project-card featured reveal" data-href="me35-robotics.html" role="link" tabindex="0">
+    <div class="project-card featured reveal" data-href="cellino-projects.html" role="link" tabindex="0">
       <div class="project-thumb">
-        <img src="images/me35-robotics.jpg" alt="ME35 Robotics"/>
+        <img src="images/Cellino/OpeningImage.png" alt="Cellino Biotech logo"/>
       </div>
       <div class="project-info">
         <p class="project-type">Featured · Mechanical + Automation</p>
-        <h3 class="project-title">ME35: Robotics</h3>
-        <p class="project-desc">Robotics class at Tufts where I built a range of cool projects working with hardware, sensors, microcontrollers, and programming to design and control robotic systems.</p>
-        <div class="project-stack"><span class="stack-tag">Robotics</span><span class="stack-tag">Microcontrollers</span><span class="stack-tag">Python</span></div>
+        <h3 class="project-title">Cellino Projects</h3>
+        <p class="project-desc">Mechanical engineering work at Cellino Biotech, from an automated fluidics system as an intern to designing architecture for a next-gen automated cell-processing prototype full-time.</p>
+        <div class="project-stack"><span class="stack-tag">Automation</span><span class="stack-tag">CAD</span><span class="stack-tag">Software Integration</span></div>
         <span class="project-arrow">View project →</span>
       </div>
     </div>
 
-    <div class="project-card reveal" data-href="san-siro-stadium.html" role="link" tabindex="0">
+    <div class="project-card reveal" data-href="concurrent-programming-casino-game.html" role="link" tabindex="0">
       <div class="project-thumb">
-        <img src="images/san-siro.jpg" alt="San Siro Stadium"/>
-      </div>
-      <div class="project-info">
-        <p class="project-type">Mechanical</p>
-        <h3 class="project-title">San Siro Stadium</h3>
-        <p class="project-desc">Modeled the iconic San Siro Stadium in Milan using SolidWorks, recreating the stadium's distinctive architecture and structural geometry in a full 3D virtual model.</p>
-        <div class="project-stack"><span class="stack-tag">SolidWorks</span><span class="stack-tag">CAD</span></div>
-        <span class="project-arrow">View project →</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-thumb">
-        <svg class="placeholder-svg" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="225" fill="#1E2024"/>
-          <g stroke="#3B8BEB" stroke-width="1.2" fill="none" opacity="0.5">
-            <polyline points="60,170 130,110 200,140 270,80 340,100"/>
-            <line x1="60" y1="50" x2="60" y2="175" stroke="#2A2D33"/>
-            <line x1="60" y1="175" x2="355" y2="175" stroke="#2A2D33"/>
-          </g>
-          <text x="200" y="135" text-anchor="middle" fill="#3B8BEB" font-family="JetBrains Mono,monospace" font-size="10" opacity="0.5">[ add image ]</text>
-        </svg>
+        <img src="images/ConcurrentProgramming/OpeningImage.png" alt="Server-client threading model for the casino game"/>
       </div>
       <div class="project-info">
         <p class="project-type">Software</p>
-        <h3 class="project-title">Project Title</h3>
-        <p class="project-desc">Short description of this software project.</p>
-        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">C++</span></div>
+        <h3 class="project-title">Concurrent Programming Casino Game</h3>
+        <p class="project-desc">Built a multiplayer casino game with a multithreaded server-client architecture.</p>
+        <div class="project-stack"><span class="stack-tag">Concurrent Programming</span><span class="stack-tag">Multithreading</span><span class="stack-tag">Networking</span></div>
+        <span class="project-arrow">View project →</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-href="senior-design-kaleidosphere.html" role="link" tabindex="0">
+      <div class="project-thumb">
+        <img src="images/SeniorDesign/FinishedKaleidoshphere.png" alt="Finished Kaleidosphere"/>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Mechanical</p>
+        <h3 class="project-title">Senior Design: Kaleidosphere</h3>
+        <p class="project-desc">Designed the Kaleidosphere, a moiré-pattern toy sponsored by Professor James Intriligator, using a weighted inner sphere and water interface to create a dynamic optical effect for kids.</p>
+        <div class="project-stack"><span class="stack-tag">Injection Molding</span><span class="stack-tag">Product Design</span><span class="stack-tag">CAD</span></div>
         <span class="project-arrow">View project →</span>
       </div>
     </div>
@@ -300,9 +291,7 @@
       <div class="timeline-content">
         <h3>Mechanical Engineering Intern</h3>
         <div class="company">Exact Engineering · Needham, MA</div>
-        <ul>
-          <p>Machined, assembled, and tested prototype products for clients across multiple industries. Collaborated directly with customers to develop designs, select materials, and support product realization.</p>
-        </ul>
+        <p>Machined, assembled, and tested prototype products for clients across multiple industries. Collaborated directly with customers to develop designs, select materials, and support product realization.</p>
       </div>
     </div>
     <div class="timeline-item reveal">
