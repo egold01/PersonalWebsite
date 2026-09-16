@@ -33,6 +33,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .source-image-list{display:grid;gap:1.5rem;clear:both}
 .source-image-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 .source-image-row .source-image:first-child{height:auto}
+.source-image-row:not(.comparison-row-one):not(.comparison-row-two) .source-image,
+.source-image-row:not(.comparison-row-one):not(.comparison-row-two) .source-video{aspect-ratio:4/3;height:auto;object-fit:contain;background:var(--surface2)}
 .source-image-row.comparison-row-one .source-image:last-child{height:auto;aspect-ratio:2.326;object-fit:cover}
 .source-image-row.comparison-row-two .source-image:last-child{height:auto;aspect-ratio:2.116;object-fit:cover}
 .source-image-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem;align-items:center}
